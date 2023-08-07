@@ -177,7 +177,10 @@ try {
     if (mainWindow === null) {
       createWindow();
     }
-    
+  });
+
+  app.setLoginItemSettings({
+    openAtLogin: true,
   });
 
 } catch (e) {
