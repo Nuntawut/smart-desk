@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-md navbar-light custom-bg fixed-top">
+    <div class="container">
+        <h5 class="text-center custom-font-color"><i class="bi bi-person-add fs-1"></i> สมัครสมาชิก</h5>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-6">
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                <div class="d-flex flex-column">
+                    <div class="mx-4 mt-4">
+                        <h5>ข้อมูลทั่วไป</h5>
+                        <hr>
+                        <div class="form-floating">
+                            <select class="form-select" formControlName="title_id">
+                                <!-- <option value="" disabled selected>คำนำหน้า</option> -->
+                                <option *ngFor="let option of titleOptions" [value]="option.title_id">{{ option.title_name }}</option>
+                            </select>
+                            <label for="floatingInput">คำนำหน้า</label>
+                        </div>
+                        <div *ngIf="title_id?.invalid && (title_id?.dirty || title_id?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="title_id?.errors?.['required']">Title is required.</div>
+                        </div>
+
+                        <div class="form-floating mt-3 ">
+                            <input type="text" class="form-control" placeholder="ชื่อ" formControlName="fname">
+                            <label for="floatingInput">ชื่อ</label>
+                        </div>
+                        <div *ngIf="fname?.invalid && (fname?.dirty || fname?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="fname?.errors?.['required']">Firstname is required.</div>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input type="text" class="form-control" placeholder="นามสกุล" formControlName="lname">
+                            <label for="floatingInput">นามสกุล</label>
+                        </div>
+                        <div *ngIf="lname?.invalid && (lname?.dirty || lname?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="lname?.errors?.['required']">Lastname is required.</div>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input type="email" class="form-control" placeholder="อีเมล์" formControlName="email">
+                            <label for="floatingInput">อีเมล์</label>
+                        </div>
+                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="email?.errors?.['email']">Invalid email format.</div>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" formControlName="tel">
+                            <label for="floatingInput">เบอร์โทรศัพท์</label>
+                        </div>
+                        <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="tel?.errors?.['required']">Telephone number is required.</div>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <select class="form-select" formControlName="institution_id">
+                                <option *ngFor="let option of institutionOptions" [value]="option.institution_id">{{ option.institution_name }}</option>
+                            </select>
+                            <label for="floatingInput">สังกัด</label>
+                        </div>
+                        <div *ngIf="institution_id?.invalid && (institution_id?.dirty || institution_id?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="institution_id?.errors?.['required']">Institution is required.</div>
+                        </div>
+                    </div>
+                    <div class="mx-4 mt-5">
+                        <h5>ข้อมูลผู้ใช้งาน</h5>
+                        <hr>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="username" placeholder="ชื่อผู้ใช้งาน" formControlName="username">
+                            <label for="floatingInput">ชื่อผู้ใช้งาน</label>
+                        </div>
+                        <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="text-danger fade show mt-1">
+                            <div *ngIf="username?.errors?.['required']">Username is required.</div>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input type="password" class="form-control" placeholder="รหัสผ่าน" formControlName="password">
+                            <label for="floatingInput">รหัสผ่าน</label>
+                        </div>
+                        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger fade show mt-1">
+                            Password is required and must be at least 6 characters long.
+                        </div>
+                        <div class="form-floating mt-3">
+                            <input type="password" class="form-control" placeholder="ยืนยันรหัสผ่าน" formControlName="confirmPassword">
+                            <label for="floatingInput">ยืนยันรหัสผ่าน</label>
+                        </div>
+                        <div *ngIf="signUpForm?.hasError('passwordMismatch') && (confirmPassword?.dirty || confirmPassword?.touched)" class="text-danger fade show mt-1">
+                                Passwords do not match.
+                        </div>
+                    </div>
+                    <div class="mx-4 mt-3 mb-3">
+                        <button id="myBtn" class="btn btn-primary w-100" >สมัคร</button>
+                    </div>
+                  </div>
+            </form>
+            <p class="text-center" style="color: #2d3c44;">หากท่านมีบัญชีแล้ว? <a routerLink="/signin">เข้าสู่ระบบ</a></p>
+        </div>
+    </div>
+</div>

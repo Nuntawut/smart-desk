@@ -1,0 +1,28 @@
+.nav-flush .nav-link {
+    border-radius: 0;
+    color: #ffffff;
+  }
+  
+  .nav-pills .nav-link.active {
+    color: #5a0c18;
+    background-color: #ffffff;
+}
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #880a1f;
+}
+
+.dropdown-item.active{
+  color: #ffffff;
+  background-color: #5a0c18;
+}
+  
+  .sidebar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 4.5rem;
+  }
+  
+  .flex-grow {
+    flex-grow: 1;
+  } 

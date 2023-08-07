@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row justify-content-center mt-3">
+      <div class="col-lg-4 col-md-6">
+        <div class="text-center mb-4">
+          <img src="assets/images/eng-logo.png" width="20%" alt="Logo" class="img-fluid">
+        </div>
+        <h2 class="text-center mb-4" style="color: #2d3c44;">SMART DESK</h2>
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+              <label for="floatingInput">ชื่อผู้ใช้งาน</label>
+            </div>
+            <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="text-danger fade show mt-1">
+              <div *ngIf="username?.errors?.['required']">Username is required.</div>
+          </div>
+
+            <div class="form-floating mt-4">
+              <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+              <label for="floatingPassword">รหัสผ่าน</label>
+            </div>
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger fade show mt-1">
+              <div *ngIf="password?.errors?.['required']">Password is required.</div>
+          </div>
+            <div class="mb-4 mt-4">
+              <button id="myBtn" class="btn btn-primary custom-button w-100" >เข้าสู่ระบบ</button>
+            </div>
+        </form>
+        <p class="text-center" style="color: #2d3c44;">หากท่านยังไม่มีบัญชี? <a routerLink="/signup" >สมัครสมาชิก</a></p>
+      </div>
+    </div>
+</div>
