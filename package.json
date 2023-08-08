@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "ENG SUT Smart Desk",
   "homepage": "https://beta.sut.ac.th/ie/",
+  "repository": "https://github.com/Nuntawut/smart-desk",
   "author": {
-    "name": "Nuntawut Kaoungku",
+    "name": "Eng SUT",
     "email": "nuntawut@sut.ac.th"
   },
   "keywords": [

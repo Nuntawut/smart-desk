@@ -4,6 +4,12 @@ import * as path from 'path';
 import * as fs from 'fs';
 import log from 'electron-log';
 
+require('update-electron-app')({
+  repo: 'github-user/repo',
+  updateInterval: '1 hour',
+  logger: log
+})
+
 const serverPort = 5432; // Replace with the actual port number of your UDP server
 const serverAddress = '203.158.7.77'; // Replace with the IP address of your UDP server
 //const serverAddress = '127.0.0.1';
@@ -12,15 +18,6 @@ let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
 let appTray = null
 let isQuitting = false;
-
-export default class AppUpdater {
-  constructor() {
-    const log = require("electron-log")
-    log.transports.file.level = "debug"
-    autoUpdater.logger = log
-    autoUpdater.checkForUpdatesAndNotify()
-  }
-}
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -128,24 +125,6 @@ function createWindow(): BrowserWindow {
     mainWindow = null;
   });
 
-  // Additional code for handling update events
-  autoUpdater.on('update-available', () => {
-    log.info('Update available.');
-  });
-
-  autoUpdater.on('update-not-available', () => {
-    log.info('No update available.');
-  });
-
-  autoUpdater.on('error', (error) => {
-    log.error('Error checking for updates:', error);
-  });
-
-  autoUpdater.on('update-downloaded', (info) => {
-    log.info('Update downloaded:', info);
-    autoUpdater.quitAndInstall();
-  });
-
   return mainWindow;
 }
 
@@ -153,14 +132,6 @@ try {
   app.on('ready', () => {
     
     setTimeout(createWindow, 400)
-    autoUpdater.setFeedURL({
-      provider: 'github',
-      repo: 'https://github.com/Nuntawut/smart-desk/releases', // Replace with your repository name
-      owner: 'Nuntawut', // Replace with your GitHub username
-      private: false, // Set to true if it's a private repository
-      token: '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' // Replace with your GitHub token
-    });
-  
 
     const iconPath = path.join(__dirname, 'images/eng-logo.png');
 
