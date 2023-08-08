@@ -11,7 +11,7 @@
               <label for="floatingInput">ชื่อผู้ใช้งาน</label>
             </div>
             <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="text-danger fade show mt-1">
-              <div *ngIf="username?.errors?.['required']">Username is required.</div>
+              <div *ngIf="username?.errors?.['required']">กรุณากรอกชื่อผู้ใช้งาน</div>
           </div>
 
             <div class="form-floating mt-4">
@@ -19,7 +19,7 @@
               <label for="floatingPassword">รหัสผ่าน</label>
             </div>
             <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger fade show mt-1">
-              <div *ngIf="password?.errors?.['required']">Password is required.</div>
+              <div *ngIf="password?.errors?.['required']">กรุณากรอกรหัสผ่าน</div>
           </div>
             <div class="mb-4 mt-4">
               <button id="myBtn" class="btn btn-primary custom-button w-100" >เข้าสู่ระบบ</button>

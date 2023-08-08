@@ -39,10 +39,10 @@ export class SigninComponent {
       })
       .catch(error => {
         console.error('Login failed.', error);
-        window.alert("Login failed.");
+        alert("ชื่อผู้ใช้งาน หรือรหัสผ่านไม่ถูกต้อง!");
       });
     }else{
-      window.alert("Form is invalid. Please fill in all required fields correctly.");
+      alert("กรุณากรอกข้อมูล ชื่อผู้ใช้งาน หรือรหัสผ่าน!");
     }
     
   }
