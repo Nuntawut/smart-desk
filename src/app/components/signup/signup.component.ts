@@ -63,7 +63,9 @@ export class SignupComponent {
       this.authService.signup(formData)
       .then(response => {
         window.alert(response);
-        this.router.navigate(['/signin']);
+        setTimeout(() => {
+          this.router.navigate(['/signin']);
+        }, 100);
       })
       .catch(error => {
         console.error('Signup failed.', error);

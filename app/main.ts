@@ -155,7 +155,7 @@ try {
     setTimeout(createWindow, 400)
     autoUpdater.setFeedURL({
       provider: 'github',
-      repo: 'https://github.com/Nuntawut/smart-desk', // Replace with your repository name
+      repo: 'https://github.com/Nuntawut/smart-desk/releases', // Replace with your repository name
       owner: 'Nuntawut', // Replace with your GitHub username
       private: false, // Set to true if it's a private repository
       token: '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' // Replace with your GitHub token
