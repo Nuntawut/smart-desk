@@ -10,7 +10,9 @@ import { ScoreService, StatData} from '../../services/score.service';
 export class ProfileComponent {
 
   userData: any;
-  userScore: any
+
+  watch_time: any;
+  total_score: any
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -20,7 +22,8 @@ export class ProfileComponent {
     this.userData = this.localStorageService.getItem('user');
     if (this.userData) {
       this.scoreService.getUserStat(this.userData.user_id).subscribe((data:StatData) => {
-        this.userScore = data;
+        this.watch_time = data.watch_time;
+        this.total_score = data.total_score;
       });
     }
   }
