@@ -13,13 +13,24 @@ export class ScoreService {
     return axios.post('/score/create', data)
   }
 
-  select_score(data:any){
-    console.log("select_score: ",data)
-    return axios.post('/score', data)
+  getUserStat(user_id: number): Observable<any> {
+    const body = { user_id };
+
+    return new Observable(observer => {
+      axios.post<StatData[]>('/score', body)
+        .then(response => {
+          observer.next(response.data);
+          observer.complete();
+        })
+        .catch(error => {
+          observer.error(error);
+        });
+    });
   }
 
   getUserScores(user_id: number): Observable<any> {
-    const body = { user_id }; // Send user_id in request body
+    
+    const body = { user_id };
 
     return new Observable(observer => {
       axios.post<ScoreData[]>('/score/user_scores', body)
@@ -37,5 +48,10 @@ export class ScoreService {
 
 export interface ScoreData {
   formatted_date: string; // Change the type if necessary
+  total_score: number;
+}
+
+export interface StatData {
+  watch_time: number; // Change the type if necessary
   total_score: number;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service'
-import { ScoreService } from '../../services/score.service';
+import { ScoreService, StatData} from '../../services/score.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,16 +19,8 @@ export class ProfileComponent {
 
     this.userData = this.localStorageService.getItem('user');
     if (this.userData) {
-      console.log(this.userData.user_id)
-      this.scoreService.select_score({
-        'user_id': this.userData.user_id
-      })
-      .then(response => {
-        this.userScore = response.data
-        console.log('Select score successful!', response.data);
-      })
-      .catch(error => {
-        console.error('Select score successful!', error);
+      this.scoreService.getUserStat(this.userData.user_id).subscribe((data:StatData) => {
+        this.userScore = data;
       });
     }
   }

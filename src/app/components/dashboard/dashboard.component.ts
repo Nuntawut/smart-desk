@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { LocalStorageService } from '../../services/local-storage.service'
-import { ScoreService, ScoreData } from '../../services/score.service';
+import { ScoreService, ScoreData, StatData } from '../../services/score.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +10,10 @@ import { ScoreService, ScoreData } from '../../services/score.service';
 })
 export class DashboardComponent {
 
-  userData: any;
-  userScore: any
+  watch_time: any;
+  total_score: any
+
+  userData: any
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -23,20 +25,15 @@ export class DashboardComponent {
     this.userData = this.localStorageService.getItem('user');
 
     if (this.userData) {
-      this.scoreService.select_score({
-        'user_id': this.userData.user_id
-      })
-      .then(response => {
-        this.userScore = response.data
-        console.log('Select score successful!', response.data);
-      })
-      .catch(error => {
-        console.error('Select score successful!', error);
+      this.scoreService.getUserStat(this.userData.user_id).subscribe((data:StatData) => {
+        this.watch_time = data.watch_time;
+        this.total_score = data.total_score;
       });
 
-      this.scoreService.getUserScores( this.userData.user_id).subscribe((data:ScoreData[]) => {
+      this.scoreService.getUserScores(this.userData.user_id).subscribe((data:ScoreData[]) => {
         const dates = data.map(item => item.formatted_date);
         const scores = data.map(item => item.total_score);
+        console.log(dates)
   
         const ctx = document.getElementById('myChart') as HTMLCanvasElement;
         const myChart = new Chart(ctx, {
@@ -79,5 +76,4 @@ export class DashboardComponent {
       });
     }
   }
-  
 }

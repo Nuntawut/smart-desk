@@ -1,17 +1,9 @@
 import {app, BrowserWindow, ipcMain, Tray, Menu} from 'electron';
-import { autoUpdater } from "electron-updater"
 import * as path from 'path';
 import * as fs from 'fs';
-import log from 'electron-log';
 
-require('update-electron-app')({
-  repo: 'github-user/repo',
-  updateInterval: '1 hour',
-  logger: log
-})
-
-const serverPort = 5432; // Replace with the actual port number of your UDP server
-const serverAddress = '203.158.7.77'; // Replace with the IP address of your UDP server
+const serverPort = 5432; 
+const serverAddress = '203.158.7.77'; 
 //const serverAddress = '127.0.0.1';
 
 let mainWindow: BrowserWindow | null = null;
@@ -73,7 +65,7 @@ function createPopupWindow (task_description:string ,video_id:string) {
 }
 function createWindow(): BrowserWindow {
   mainWindow = new BrowserWindow({
-    width: 500,
+    width: 520,
     height: 800,
     resizable: false,
     webPreferences: {
@@ -133,7 +125,7 @@ try {
     
     setTimeout(createWindow, 400)
 
-    const iconPath = path.join(__dirname, 'images/eng-logo.png');
+    const iconPath = path.join(__dirname, '../dist/assets/icons/favicon.ico');
 
     appTray = new Tray(iconPath)
     
