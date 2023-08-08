@@ -7,8 +7,8 @@ import { SharedModule } from './shared/shared.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import axios from 'axios';
 
-//axios.defaults.baseURL = 'http://203.158.7.77:3000';
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://203.158.7.77:3000';
+//axios.defaults.baseURL = 'http://localhost:3000';
 const config: SocketIoConfig = { url: 'http://203.158.7.77:80', options: {} };
 //const config: SocketIoConfig = { url: 'http://localhost:5173', options: {} };
 
