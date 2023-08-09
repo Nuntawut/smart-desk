@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { OptionsService } from '../../services/options.service'
 import {AuthService} from '../../auth/auth.service';
+import { ElectronService } from '../../core/services';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +39,7 @@ export class SignupComponent {
   get title_id() { return this.signUpForm.get('title_id'); }
   get institution_id() { return this.signUpForm.get('institution_id'); }
   
-  constructor(private formBuilder: FormBuilder, private optionsService:OptionsService, private router: Router, private authService: AuthService, ){
+  constructor(private electronService: ElectronService, private formBuilder: FormBuilder, private optionsService:OptionsService, private router: Router, private authService: AuthService, ){
     this.optionsService.fetchTitleOptions()
       .then(options => {
         this.titleOptions = options.data;
@@ -58,22 +59,38 @@ export class SignupComponent {
 
   onSubmit(){
     if (this.signUpForm.valid) {
+      console.log("signUpForm is valid")
+
       const formData = this.signUpForm.value;
+
       this.authService.signup(formData)
-      .subscribe(
-        response => {
-          console.log('Signup successful:', response);
-          alert("สมัครสมาชิกสำเร็จ");
-          this.router.navigate(['/main']);
-        },
-        error => {
-          console.error('Signup error:', error);
-          alert("สมัครสมาชิกไม่สำเร็จ");
-        }
-      );
+        .then(response => {
+          const messageData = { title: "Signup",
+                                message: "สมัครสมาชิกสำเร็จ",
+                                buttons: ['OK'],
+                                navigateToNextPage: true};
+
+          this.electronService.ipcRenderer.send("showMessageBox", messageData)
+         
+          this.electronService.ipcRenderer.on('resMessageBox', (event, data) => {
+            this.router.navigate(['/signin']);
+          });
+        })
+        .catch(error => {
+          console.error('Signup failed.', error);
+          const messageData = {title: "Signup",
+                                message: "สมัครสมาชิกไม่สำเร็จ เนื่องจากชื่อผู้ใช้นี้อยู่แล้ว!",
+                                buttons: ['OK'],
+                                navigateToNextPage: false};
+          this.electronService.ipcRenderer.send("showMessageBox", messageData)
+        });
     }else{
       console.log("signUpForm is invalid")
-      alert("กรุณากรอกข้อมูลในช่องที่ต้องกรอกให้ถูกต้องทั้งหมด!");
+      const messageData = {title: "Signup",
+                                message: "กรุณากรอกข้อมูลในช่องที่ต้องกรอกให้ถูกต้องทั้งหมด!!",
+                                buttons: ['OK'],
+                                navigateToNextPage: false};
+      this.electronService.ipcRenderer.send("showMessageBox",messageData)
     }
   }
 

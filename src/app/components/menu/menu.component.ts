@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthService} from '../../auth/auth.service'
+import { ElectronService } from '../../core/services';
 
 @Component({
   selector: 'app-menu',
@@ -9,12 +10,21 @@ import {AuthService} from '../../auth/auth.service'
 })
 export class MenuComponent {
 
-  constructor(private router:Router, private authService: AuthService) { }
+  constructor(private electronService: ElectronService, private router:Router, private authService: AuthService) { }
   
   signout(){
-    console.log("Signout")
-    if (this.authService.signout()){
-      this.router.navigate(['/signin']);
-    }
+      const messageData = {title: "SignOut",
+                                message: "คุณต้องการออกจากระบบใช่หรือไม่",
+                                buttons: ['ใช่', 'ไม่ใช่'],
+                                navigateToNextPage: true};
+
+      this.electronService.ipcRenderer.send("showMessageBox", messageData)
+         
+      this.electronService.ipcRenderer.on('resMessageBox', (event, data) => {
+        if (this.authService.signout()){
+          this.router.navigate(['/signin']);
+        }
+      });
+
   }
 }

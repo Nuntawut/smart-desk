@@ -167,6 +167,22 @@ try {
       
     });
 
+    ipcMain.on('showMessageBox', (event, arg) => {
+
+      dialog.showMessageBox({
+        type: 'info',
+        title: arg.title || 'Message',
+        message: arg.message || 'No message provided',
+        buttons: arg.buttons || ['OK']
+      }).then((result) => {
+        if (result.response === 0 && arg.navigateToNextPage) {
+            mainWindow?.webContents.send('resMessageBox', {
+              message: "OK"
+            })
+        }
+      });
+    });
+
     appTray.on('click', () => {
       if (mainWindow?.isVisible()) {
         mainWindow?.hide();
