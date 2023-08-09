@@ -132,7 +132,7 @@ try {
     
     setTimeout(createWindow, 400)
 
-    const iconPath = path.join(__dirname, '../images/favicon.png');
+    const iconPath = path.join(__dirname, 'images/favicon.png');
 
     appTray = new Tray(iconPath)
     
