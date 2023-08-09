@@ -1,4 +1,5 @@
 {
+  "productName": "Smart Desk",
   "asar": true,
   "directories": {
     "output": "release/"
@@ -12,6 +13,15 @@
     {
       "from": "../dist",
       "filter": ["**/*"]
+    }
+  ],
+  "publish": [
+    {
+      "provider": "github",
+      "repo": "smart-desk",
+      "owner": "Nuntawut",
+      "private": false,
+      "token": "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"
     }
   ],
   "win": {

@@ -1,7 +1,10 @@
-import {app, BrowserWindow, ipcMain, Tray, Menu} from 'electron';
+import {app, BrowserWindow, ipcMain, Tray, Menu, dialog} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
-import { autoUpdater } from "electron-updater"
+const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
+
+log.transports.file.level = 'info'; // Set the log level
 
 const serverPort = 5432; 
 const serverAddress = '203.158.7.77'; 
@@ -11,12 +14,6 @@ let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
 let appTray = null
 let isQuitting = false;
-
-export default class AppUpdater {
-  constructor() {
-    autoUpdater.checkForUpdatesAndNotify()
-  }
-}
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -132,6 +129,9 @@ try {
     
     setTimeout(createWindow, 400)
 
+    // Configure autoUpdater
+    autoUpdater.checkForUpdatesAndNotify();
+
     const iconPath = path.join(__dirname, 'images/favicon.png');
 
     appTray = new Tray(iconPath)
@@ -190,6 +190,44 @@ try {
   app.setLoginItemSettings({
     openAtLogin: false,
   });
+
+    // Log update events using electron-log
+    autoUpdater.on('checking-for-update', () => {
+      log.info('Checking for update...');
+    });
+  
+    autoUpdater.on('update-available', (info:any) => {
+      log.info(`Update available: ${info.version}`);
+    });
+  
+    autoUpdater.on('update-not-available', () => {
+      log.info('No update available');
+    });
+  
+    autoUpdater.on('error', (error:any) => {
+      log.error('Error while checking for updates:', error);
+    });
+  
+    autoUpdater.on('download-progress', (progressObj:any) => {
+      log.info("\n\nDownload progres");
+      log.info(progressObj);
+    });
+  
+    autoUpdater.on('update-downloaded', (info:any) => {
+      log.info('Update downloaded', info);
+      // Prompt the user to install the update
+      dialog.showMessageBox({
+        type: 'info',
+        title: 'Update Ready',
+        message: 'The update has been downloaded. Restart the app to install it.',
+        buttons: ['Restart', 'Later']
+      }).then((result) => {
+        if (result.response === 0) {
+          // User chose to restart and install the update
+          autoUpdater.quitAndInstall();
+        }
+      });
+    });
 
 } catch (e) {
   // Catch Error
