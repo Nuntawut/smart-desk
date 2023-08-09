@@ -10,7 +10,7 @@ window.api.receiveFromMain('data-from-main', (data) => {
   
   player = new YT.Player('player', {
     width: '100%',
-    height: '680',
+    height: data.height,
     videoId: data.message,
     playerVars: {
       'playsinline': 1,

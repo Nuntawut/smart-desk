@@ -1,8 +1,8 @@
 {
-  "name": "smart-desk",
-  "productName": "Smart Desk",
+  "name": "desk-health",
+  "productName": "Desk Health",
   "version": "1.0.0",
-  "description": "ENG SUT Smart Desk",
+  "description": "Eng SUT Desk Health",
   "homepage": "https://beta.sut.ac.th/ie/",
   "repository": "https://github.com/Nuntawut/smart-desk",
   "author": {

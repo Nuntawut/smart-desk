@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain, Tray, Menu, dialog} from 'electron';
+import {app, BrowserWindow, ipcMain, Tray, Menu, dialog, screen} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 const { autoUpdater } = require('electron-updater');
@@ -8,7 +8,6 @@ log.transports.file.level = 'info'; // Set the log level
 
 const serverPort = 5432; 
 const serverAddress = '203.158.7.77'; 
-//const serverAddress = '127.0.0.1';
 
 let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
@@ -26,10 +25,17 @@ function quitFromTray() {
 }
 
 function createPopupWindow (task_description:string ,video_id:string) {
+
+  const primaryDisplay = screen.getPrimaryDisplay()
+  const { width, height } = primaryDisplay.workAreaSize
+  
+  console.log(width,height)
   
   secondaryWindow = new BrowserWindow({
-    width: 1280,
-    height: 840,
+    width: width,
+    height: height,
+    x: 0,
+    y: 0,
     minimizable: false,
     alwaysOnTop: true,
     movable: false,
@@ -44,7 +50,7 @@ function createPopupWindow (task_description:string ,video_id:string) {
   //secondaryWindow.setMenuBarVisibility(false);
 
   secondaryWindow.webContents.on('did-finish-load', () => {
-    secondaryWindow?.webContents.send('data-from-main', { message: video_id });
+    secondaryWindow?.webContents.send('data-from-main', { message: video_id, width: width, height: height-150});
   });
 
   // Listening for the message from the renderer process
@@ -68,6 +74,7 @@ function createPopupWindow (task_description:string ,video_id:string) {
   return secondaryWindow;
 }
 function createWindow(): BrowserWindow {
+
   mainWindow = new BrowserWindow({
     width: 520,
     height: 800,
@@ -137,11 +144,11 @@ try {
     appTray = new Tray(iconPath)
     
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Show App', click: () => { mainWindow?.show()}},
-        { label: 'Quit', click: () => { quitFromTray();}}
+        { label: 'เปิดโปรแกรม', click: () => { mainWindow?.show()}},
+        { label: 'ออกจากโปรแกรม', click: () => { quitFromTray();}}
       ]);
   
-    appTray.setToolTip('Electron App');
+    appTray.setToolTip('Smart Desk');
 
     // Call this again for Linux because we modified the context menu
     appTray.setContextMenu(contextMenu)
@@ -218,9 +225,9 @@ try {
       // Prompt the user to install the update
       dialog.showMessageBox({
         type: 'info',
-        title: 'Update Ready',
-        message: 'The update has been downloaded. Restart the app to install it.',
-        buttons: ['Restart', 'Later']
+        title: 'รายการอัพเดทพร้อมติดตั้ง',
+        message: 'รายการอัพเดทพร้อมติดตั้ง รีสตาร์ทเพื่อติดตั้ง',
+        buttons: ['รีสตาร์ท', 'ภายหลัง']
       }).then((result) => {
         if (result.response === 0) {
           // User chose to restart and install the update

@@ -1,6 +1,7 @@
 {
   "productName": "Smart Desk",
   "asar": true,
+  "compression": "normal",
   "directories": {
     "output": "release/"
   },
