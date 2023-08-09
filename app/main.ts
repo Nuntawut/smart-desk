@@ -1,6 +1,7 @@
 import {app, BrowserWindow, ipcMain, Tray, Menu} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
+import { autoUpdater } from "electron-updater"
 
 const serverPort = 5432; 
 const serverAddress = '203.158.7.77'; 
@@ -10,6 +11,12 @@ let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
 let appTray = null
 let isQuitting = false;
+
+export default class AppUpdater {
+  constructor() {
+    autoUpdater.checkForUpdatesAndNotify()
+  }
+}
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -125,7 +132,7 @@ try {
     
     setTimeout(createWindow, 400)
 
-    const iconPath = path.join(__dirname, '../dist/assets/icons/favicon.ico');
+    const iconPath = path.join(__dirname, '../images/favicon.png');
 
     appTray = new Tray(iconPath)
     
