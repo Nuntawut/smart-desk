@@ -58,17 +58,19 @@ export class SignupComponent {
 
   onSubmit(){
     if (this.signUpForm.valid) {
-      console.log("signUpForm is valid")
       const formData = this.signUpForm.value;
       this.authService.signup(formData)
-      .then(response => {
-        alert("สมัครสมาชิกสำเร็จ");
-        this.router.navigate(['/main']);
-      })
-      .catch(error => {
-        console.error('Signup failed.', error);
-        alert("สมัครสมาชิกไม่สำเร็จ");
-      });
+      .subscribe(
+        response => {
+          console.log('Signup successful:', response);
+          alert("สมัครสมาชิกสำเร็จ");
+          this.router.navigate(['/main']);
+        },
+        error => {
+          console.error('Signup error:', error);
+          alert("สมัครสมาชิกไม่สำเร็จ");
+        }
+      );
     }else{
       console.log("signUpForm is invalid")
       alert("กรุณากรอกข้อมูลในช่องที่ต้องกรอกให้ถูกต้องทั้งหมด!");
