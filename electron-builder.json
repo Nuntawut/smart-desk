@@ -1,10 +1,9 @@
 {
-  "appId": "desk-health",
+  "appId": "th.ac.sut.beta.ie.myapp",
   "productName": "Desk Health",
-  "publisherName": "CPE SUT",
   "copyright": "Copyright © year CPE SUT",
   "asar": true,
-  "compression": "normal",
+  "compression": "maximum",
   "directories": {
     "output": "release/"
   },
@@ -25,10 +24,11 @@
       "repo": "smart-desk",
       "owner": "Nuntawut",
       "private": false,
-      "token": "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"
+      "token": "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"
     }
   ],
   "win": {
+    "publisher": "CPE SUT",
     "icon": "dist/assets/icons",
     "target": [
       "nsis"
