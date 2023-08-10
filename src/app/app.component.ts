@@ -9,11 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  isLoading: boolean = true;
+
   constructor(
     private electronService: ElectronService,
     private router: Router
   ) {
-    
+
+    // Simulate loading time
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000); // Adjust the time as needed
+
     console.log('APP_CONFIG', APP_CONFIG);
     if (this.electronService.isElectron) {
       console.log(process.env);
@@ -23,4 +31,10 @@ export class AppComponent {
       console.log('Run in browser');
     }
   }
+
+
+  ngOnInit(): void {
+
+  }
+
 }
