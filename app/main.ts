@@ -148,7 +148,7 @@ try {
         { label: 'ออกจากโปรแกรม', click: () => { quitFromTray();}}
       ]);
   
-    appTray.setToolTip('Smart Desk');
+    appTray.setToolTip('Desk Health');
 
     // Call this again for Linux because we modified the context menu
     appTray.setContextMenu(contextMenu)
