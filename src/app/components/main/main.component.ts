@@ -20,10 +20,12 @@ export class MainComponent {
     private electronService: ElectronService, 
     private scoreService:ScoreService) { 
     // Connect to the Socket.IO server when the component initializes
-    this.socketService.connect();
+    
   }
 
   ngOnInit() {
+    console.log("Main Print")
+    this.socketService.connect();
 
     this.user = this.localStorageService.getItem('user');
 
