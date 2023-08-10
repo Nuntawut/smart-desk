@@ -24,6 +24,10 @@ export class AuthService {
     return axios.post('/user/login', data);
   }
 
+  getProfile(token: string){
+    return axios.get('/user/profile', {headers: {Authorization: token}})
+  }
+
   signup(data:any){
     return axios.post('/user/create', data);
   }

@@ -161,8 +161,10 @@ try {
       console.log('Video_id:', video_id);
       console.log('mode:', mode);
 
-      if (secondaryWindow === null) {
+      if (secondaryWindow === null && mode=="1") {
         createPopupWindow(task_description, video_id);
+      }else{
+        console.log('Popup:', mode);
       }
       
     });

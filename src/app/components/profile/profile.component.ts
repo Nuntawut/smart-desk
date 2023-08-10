@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service'
-import { ScoreService, StatData} from '../../services/score.service';
+import { ScoreService} from '../../services/score.service';
+import {AuthService} from '../../auth/auth.service'
 
 @Component({
   selector: 'app-profile',
@@ -10,21 +11,32 @@ import { ScoreService, StatData} from '../../services/score.service';
 export class ProfileComponent {
 
   userData: any;
-
-  watch_time: any;
-  total_score: any
+  userProfile: any = {};
+  userScore: any = {}
 
   constructor(
+    private authService:AuthService,
     private localStorageService: LocalStorageService,
     private scoreService:ScoreService
   ) {
 
     this.userData = this.localStorageService.getItem('user');
     if (this.userData) {
-      this.scoreService.getUserStat(this.userData.user_id).subscribe((data:StatData) => {
-        this.watch_time = data.watch_time;
-        this.total_score = data.total_score;
-      });
+      this.authService.getProfile(this.userData.token)
+        .then(response => {
+          this.userProfile = response.data;
+        })
+        .catch(error => {
+          console.log('Access denied:', error);
+        });
+
+      this.scoreService.getUserStat(this.userData.token)
+        .then(response => {
+          this.userScore = response.data;
+        })
+        .catch(error => {
+          console.log('Access denied:', error);
+        });
     }
   }
 }

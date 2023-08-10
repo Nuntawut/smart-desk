@@ -1,5 +1,8 @@
 {
-  "productName": "Smart Desk",
+  "appId": "desk-health",
+  "productName": "Desk Health",
+  "publisherName": "CPE SUT",
+  "copyright": "Copyright © year CPE SUT",
   "asar": true,
   "compression": "normal",
   "directories": {
@@ -22,7 +25,7 @@
       "repo": "smart-desk",
       "owner": "Nuntawut",
       "private": false,
-      "token": "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"
+      "token": "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"
     }
   ],
   "win": {

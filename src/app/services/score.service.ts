@@ -13,27 +13,14 @@ export class ScoreService {
     return axios.post('/score/create', data)
   }
 
-  getUserStat(user_id: number): Observable<any> {
-    const body = { user_id };
-
-    return new Observable(observer => {
-      axios.post<StatData[]>('/score', body)
-        .then(response => {
-          observer.next(response.data);
-          observer.complete();
-        })
-        .catch(error => {
-          observer.error(error);
-        });
-    });
+  getUserStat(token: string){
+    return axios.get('/score', {headers: {Authorization: token}})
   }
 
-  getUserScores(user_id: number): Observable<any> {
-    
-    const body = { user_id };
+  getUserScores(token: string): Observable<any> {
 
     return new Observable(observer => {
-      axios.post<ScoreData[]>('/score/user_scores', body)
+      axios.get<ScoreData[]>('/score/user_scores', {headers: {Authorization: token}})
         .then(response => {
           observer.next(response.data);
           observer.complete();
@@ -51,7 +38,3 @@ export interface ScoreData {
   total_score: number;
 }
 
-export interface StatData {
-  watch_time: number; // Change the type if necessary
-  total_score: number;
-}
