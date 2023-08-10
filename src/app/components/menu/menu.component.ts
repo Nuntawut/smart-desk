@@ -10,13 +10,16 @@ import { ElectronService } from '../../core/services';
 })
 export class MenuComponent {
 
-  constructor(private electronService: ElectronService, private router:Router, private authService: AuthService) { }
+  constructor(
+    private electronService: ElectronService, 
+    private router:Router, 
+    private authService: AuthService) { }
   
   signout(){
-      const messageData = {title: "SignOut",
-                                message: "คุณต้องการออกจากระบบใช่หรือไม่",
-                                buttons: ['ใช่', 'ไม่ใช่'],
-                                navigateToNextPage: true};
+      const messageData = { title: "SignOut",
+                            message: "คุณต้องการออกจากระบบใช่หรือไม่",
+                            buttons: ['ใช่', 'ไม่ใช่'],
+                            navigateToNextPage: true};
 
       this.electronService.ipcRenderer.send("showMessageBox", messageData)
          

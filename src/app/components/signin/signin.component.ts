@@ -12,6 +12,8 @@ import { ElectronService } from '../../core/services';
 })
 export class SigninComponent {
 
+  loading: boolean = false;
+
   signInForm = this.formBuilder.group({
     username: ['', Validators.required], 
     password: ['', Validators.required], 
@@ -28,33 +30,43 @@ export class SigninComponent {
     private localStorageService: LocalStorageService, 
   ) {}
 
-  onSubmit(){
+  ngOnInit() {
+    console.log('ngOnInit:',this.loading)
+  }
 
-    if (this.signInForm.valid) {
-      this.authService.signin(this.signInForm.value)
-      .then(response => {
-        console.log('Login successful!', response.data);
-        this.localStorageService.setItem('user',response.data)
-        this.router.navigate(['/main']);
-      })
-      .catch(error => {
-        console.error('Login failed.', error);
-        const messageData = {title: "Login",
+  onSubmit(){
+    
+    this.loading = true;
+
+    setTimeout(() => {
+
+      this.loading = false;
+
+      if (this.signInForm.valid) {
+        this.authService.signin(this.signInForm.value)
+        .then(response => {
+          console.log('Login successful!', response.data);
+          this.localStorageService.setItem('user',response.data)
+          this.router.navigate(['/main']);
+        })
+        .catch(error => {
+          console.error('Login failed.', error);
+          const messageData = { title: "Login",
                                 message: "ชื่อผู้ใช้งาน หรือรหัสผ่านไม่ถูกต้อง!",
                                 buttons: ['OK'],
                                 navigateToNextPage: false};
-
+  
+          this.electronService.ipcRenderer.send("showMessageBox", messageData)
+        });
+      }else{
+        const messageData = { title: "Login",
+                              message: "กรุณากรอกข้อมูล ชื่อผู้ใช้งาน หรือรหัสผ่าน!",
+                              buttons: ['OK'],
+                              navigateToNextPage: false};
+  
         this.electronService.ipcRenderer.send("showMessageBox", messageData)
-      });
-    }else{
-      const messageData = {title: "Login",
-                                message: "กรุณากรอกข้อมูล ชื่อผู้ใช้งาน หรือรหัสผ่าน!",
-                                buttons: ['OK'],
-                                navigateToNextPage: false};
-
-      this.electronService.ipcRenderer.send("showMessageBox", messageData)
-    }
-    
+      }
+    }, 1500);
   }
 
 }

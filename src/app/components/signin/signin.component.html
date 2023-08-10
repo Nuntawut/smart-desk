@@ -22,7 +22,10 @@
               <div *ngIf="password?.errors?.['required']">กรุณากรอกรหัสผ่าน</div>
           </div>
             <div class="mb-4 mt-4">
-              <button id="myBtn" class="btn btn-primary custom-button w-100" >เข้าสู่ระบบ</button>
+              <button id="myBtn" class="btn btn-primary custom-button w-100" [disabled]="loading">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
+                {{ loading ? 'Loading...' : 'เข้าสู่ระบบ' }}
+            </button>
             </div>
         </form>
         <p class="text-center" style="color: #2d3c44;">หากท่านยังไม่มีบัญชี? <a routerLink="/signup" >สมัครสมาชิก</a></p>

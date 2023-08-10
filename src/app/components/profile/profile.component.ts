@@ -12,16 +12,20 @@ export class ProfileComponent {
 
   userData: any;
   userProfile: any = {};
-  userScore: any = {}
+  userScore: any = {};
 
   constructor(
     private authService:AuthService,
     private localStorageService: LocalStorageService,
     private scoreService:ScoreService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
 
     this.userData = this.localStorageService.getItem('user');
+
     if (this.userData) {
+      
       this.authService.getProfile(this.userData.token)
         .then(response => {
           this.userProfile = response.data;

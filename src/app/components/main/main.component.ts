@@ -14,7 +14,11 @@ export class MainComponent {
   user:any;
   message:any;
 
-  constructor(private socketService: SocketService, private localStorageService:LocalStorageService, private electronService: ElectronService, private scoreService:ScoreService) { 
+  constructor(
+    private socketService: SocketService, 
+    private localStorageService:LocalStorageService, 
+    private electronService: ElectronService, 
+    private scoreService:ScoreService) { 
     // Connect to the Socket.IO server when the component initializes
     this.socketService.connect();
   }

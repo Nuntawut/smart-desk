@@ -16,7 +16,7 @@ export class DashboardComponent {
   constructor(
     private localStorageService: LocalStorageService,
     private scoreService:ScoreService
-  ) {}
+) {}
 
   ngOnInit(): void {
 

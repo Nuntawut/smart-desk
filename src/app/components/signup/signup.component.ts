@@ -15,6 +15,8 @@ export class SignupComponent {
   titleOptions: any[]=[];
   institutionOptions: any[]=[];
 
+  loading: boolean = false;
+
   signUpForm = this.formBuilder.group({
     username: ['', Validators.required], 
     password: ['', [Validators.required, Validators.minLength(6)]], 
@@ -39,7 +41,17 @@ export class SignupComponent {
   get title_id() { return this.signUpForm.get('title_id'); }
   get institution_id() { return this.signUpForm.get('institution_id'); }
   
-  constructor(private electronService: ElectronService, private formBuilder: FormBuilder, private optionsService:OptionsService, private router: Router, private authService: AuthService, ){
+  constructor(
+    private electronService: ElectronService, 
+    private formBuilder: FormBuilder, 
+    private optionsService:OptionsService, 
+    private router: Router, 
+    private authService: AuthService, ){}
+
+  ngOnInit() {
+
+    this.loading = false;
+
     this.optionsService.fetchTitleOptions()
       .then(options => {
         this.titleOptions = options.data;
@@ -58,40 +70,50 @@ export class SignupComponent {
   }
 
   onSubmit(){
-    if (this.signUpForm.valid) {
-      console.log("signUpForm is valid")
+    
+    this.loading = true;
 
-      const formData = this.signUpForm.value;
+    setTimeout(() => {
 
-      this.authService.signup(formData)
-        .then(response => {
-          const messageData = { title: "Signup",
-                                message: "สมัครสมาชิกสำเร็จ",
-                                buttons: ['OK'],
-                                navigateToNextPage: true};
+      this.loading = false;
 
-          this.electronService.ipcRenderer.send("showMessageBox", messageData)
-         
-          this.electronService.ipcRenderer.on('resMessageBox', (event, data) => {
-            this.router.navigate(['/signin']);
+      if (this.signUpForm.valid) {
+        console.log("signUpForm is valid")
+  
+        const formData = this.signUpForm.value;
+  
+        this.authService.signup(formData)
+          .then(response => {
+            const messageData = { title: "Signup",
+                                  message: "สมัครสมาชิกสำเร็จ",
+                                  buttons: ['OK'],
+                                  navigateToNextPage: true};
+  
+            this.electronService.ipcRenderer.send("showMessageBox", messageData)
+           
+            this.electronService.ipcRenderer.on('resMessageBox', (event, data) => {
+              this.router.navigate(['/signin']);
+            });
+          })
+          .catch(error => {
+            console.error('Signup failed.', error);
+            const messageData = {title: "Signup",
+                                  message: "สมัครสมาชิกไม่สำเร็จ เนื่องจากชื่อผู้ใช้นี้อยู่แล้ว!",
+                                  buttons: ['OK'],
+                                  navigateToNextPage: false};
+            this.electronService.ipcRenderer.send("showMessageBox", messageData)
           });
-        })
-        .catch(error => {
-          console.error('Signup failed.', error);
-          const messageData = {title: "Signup",
-                                message: "สมัครสมาชิกไม่สำเร็จ เนื่องจากชื่อผู้ใช้นี้อยู่แล้ว!",
-                                buttons: ['OK'],
-                                navigateToNextPage: false};
-          this.electronService.ipcRenderer.send("showMessageBox", messageData)
-        });
-    }else{
-      console.log("signUpForm is invalid")
-      const messageData = {title: "Signup",
-                                message: "กรุณากรอกข้อมูลในช่องที่ต้องกรอกให้ถูกต้องทั้งหมด!!",
-                                buttons: ['OK'],
-                                navigateToNextPage: false};
-      this.electronService.ipcRenderer.send("showMessageBox",messageData)
-    }
+      }else{
+        console.log("signUpForm is invalid")
+        const messageData = {title: "Signup",
+                                  message: "กรุณากรอกข้อมูลในช่องที่ต้องกรอกให้ถูกต้องทั้งหมด!!",
+                                  buttons: ['OK'],
+                                  navigateToNextPage: false};
+        this.electronService.ipcRenderer.send("showMessageBox",messageData)
+      }
+    },1500);
+
+    
   }
 
   // Custom password match validator

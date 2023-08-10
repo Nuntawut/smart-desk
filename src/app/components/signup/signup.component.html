@@ -92,7 +92,10 @@
                         </div>
                     </div>
                     <div class="mx-4 mt-3 mb-3">
-                        <button id="myBtn" class="btn btn-primary w-100" >สมัคร</button>
+                        <button id="myBtn" class="btn btn-primary custom-button w-100" [disabled]="loading">
+                            <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
+                            {{ loading ? 'Loading...' : 'สมัครสมาชิก' }}
+                        </button>
                     </div>
                   </div>
             </form>
