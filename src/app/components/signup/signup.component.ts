@@ -18,14 +18,14 @@ export class SignupComponent {
   loading: boolean = false;
 
   signUpForm = this.formBuilder.group({
-    username: ['', Validators.required], 
-    password: ['', [Validators.required, Validators.minLength(6)]], 
-    confirmPassword: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(4), Validators.pattern('^[a-zA-Z0-9]+$')]], 
+    password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-zA-Z])(?=.*\\d)[A-Za-z\\d]+$')]], 
+    confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     fname: ['', Validators.required], 
     lname: ['', Validators.required],
     image: '', 
     email: ['', [Validators.required, Validators.email]], 
-    tel: ['', Validators.required],
+    tel: ['', [Validators.required, Validators.pattern(/^[0-9-]+$/)]],
     title_id: ['', Validators.required],
     institution_id: ['', Validators.required],
   },

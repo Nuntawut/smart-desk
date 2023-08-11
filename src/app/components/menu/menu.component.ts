@@ -16,18 +16,8 @@ export class MenuComponent {
     private authService: AuthService) { }
   
   signout(){
-      const messageData = { title: "SignOut",
-                            message: "คุณต้องการออกจากระบบใช่หรือไม่",
-                            buttons: ['ใช่', 'ไม่ใช่'],
-                            navigateToNextPage: true};
-
-      this.electronService.ipcRenderer.send("showMessageBox", messageData)
-         
-      this.electronService.ipcRenderer.on('resMessageBox', (event, data) => {
         if (this.authService.signout()){
           this.router.navigate(['/signin']);
         }
-      });
-
   }
 }

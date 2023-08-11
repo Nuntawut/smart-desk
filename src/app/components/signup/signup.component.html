@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light custom-bg fixed-top">
     <div class="container">
-        <h5 class="text-center custom-font-color"><i class="bi bi-person-add fs-1"></i> สมัครสมาชิก</h5>
+        <h5 class="text-center custom-font-color"><i class="bi bi-person-add fs-1"></i> ลงทะเบียนผู้ใช้งาน</h5>
     </div>
 </nav>
 <div class="container-fluid">
@@ -11,90 +11,126 @@
                     <div class="mx-4 mt-4">
                         <h5>ข้อมูลทั่วไป</h5>
                         <hr>
+
                         <div class="form-floating">
-                            <select class="form-select" formControlName="title_id">
-                                <!-- <option value="" disabled selected>คำนำหน้า</option> -->
+                            <select class="form-select" 
+                                [ngClass]="{'is-invalid': title_id?.invalid && (title_id?.dirty || title_id?.touched), 
+                                            'is-valid': title_id?.valid && (title_id?.dirty || title_id?.touched)}" 
+                                formControlName="title_id">
                                 <option *ngFor="let option of titleOptions" [value]="option.title_id">{{ option.title_name }}</option>
                             </select>
-                            <label for="floatingInput">คำนำหน้า</label>
-                        </div>
-                        <div *ngIf="title_id?.invalid && (title_id?.dirty || title_id?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="title_id?.errors?.['required']">กรุณาเลือกคำนำหน้าชื่อ</div>
+                            <label for="floatingInput">คำนำหน้า :</label>
+                            <div *ngIf="title_id?.invalid && (title_id?.dirty || title_id?.touched)" class="invalid-feedback">
+                                <div *ngIf="title_id?.errors?.['required']">กรุณาเลือกคำนำหน้าชื่อ</div>
+                            </div>
                         </div>
 
-                        <div class="form-floating mt-3 ">
-                            <input type="text" class="form-control" placeholder="ชื่อ" formControlName="fname">
-                            <label for="floatingInput">ชื่อ</label>
-                        </div>
-                        <div *ngIf="fname?.invalid && (fname?.dirty || fname?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="fname?.errors?.['required']">กรุณากรอกชื่อจริง</div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating mt-3 ">
+                                    <input type="text" class="form-control is-invalid" 
+                                        [ngClass]=" {'is-invalid': fname?.invalid && (fname?.dirty || fname?.touched), 
+                                                    'is-valid': fname?.valid && (fname?.dirty || fname?.touched)}" 
+                                        formControlName="fname">
+                                    <label for="floatingInput">ชื่อ :</label>
+                                    <div *ngIf="fname?.invalid && (fname?.dirty || fname?.touched)" class="invalid-feedback">
+                                        <div *ngIf="fname?.errors?.['required']">กรุณากรอกชื่อจริง</div>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mt-3">
+                                    <input type="text" class="form-control" 
+                                        [ngClass]="{'is-invalid': lname?.invalid && (lname?.dirty || lname?.touched),
+                                                    'is-valid': lname?.valid && (lname?.dirty || lname?.touched)}" 
+                                        formControlName="lname">
+                                    <label for="floatingInput">นามสกุล :</label>
+                                    <div *ngIf="lname?.invalid && (lname?.dirty || lname?.touched)" class="invalid-feedback">
+                                        <div *ngIf="lname?.errors?.['required']">กรุณากรอกนามสกุล</div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+
+                        <div class="form-floating mt-3">
+                            <input type="email" class="form-control" 
+                                [ngClass]="{'is-invalid': email?.invalid && (email?.dirty || email?.touched),  
+                                            'is-valid': email?.valid && (email?.dirty || email?.touched)}" 
+                                formControlName="email">
+                            <label for="floatingInput">อีเมล์ :</label>
+                            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback">
+                                <div *ngIf="email?.errors?.['required']">กรุณากรอกอีเมล์</div>
+                                <div *ngIf="email?.errors?.['email']">กรุณากรอกอีเมล์ให้ถูกต้อง</div>
+                            </div>
                         </div>
 
                         <div class="form-floating mt-3">
-                            <input type="text" class="form-control" placeholder="นามสกุล" formControlName="lname">
-                            <label for="floatingInput">นามสกุล</label>
-                        </div>
-                        <div *ngIf="lname?.invalid && (lname?.dirty || lname?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="lname?.errors?.['required']">กรุณากรอกนามสกุล</div>
-                        </div>
-
-                        <div class="form-floating mt-3">
-                            <input type="email" class="form-control" placeholder="อีเมล์" formControlName="email">
-                            <label for="floatingInput">อีเมล์</label>
-                        </div>
-                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="email?.errors?.['required']">กรุณากรอกอีเมล์</div>
-                            <div *ngIf="email?.errors?.['email']">กรุณากรอกอีเมล์ให้ถูกต้อง</div>
+                            <input type="text" class="form-control" 
+                                [ngClass]="{'is-invalid': tel?.invalid && (tel?.dirty || tel?.touched),
+                                            'is-valid': email?.valid && (email?.dirty || email?.touched)}" 
+                                formControlName="tel">
+                            <label for="floatingInput">เบอร์โทรศัพท์ :</label>
+                            <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="invalid-feedback">
+                                <div *ngIf="tel?.errors?.['required']">กรุณากรอกเบอร์โทรศัพท์</div>
+                            </div>
                         </div>
 
                         <div class="form-floating mt-3">
-                            <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" formControlName="tel">
-                            <label for="floatingInput">เบอร์โทรศัพท์</label>
-                        </div>
-                        <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="tel?.errors?.['required']">กรุณากรอกเบอร์โทรศัพท์</div>
-                        </div>
-
-                        <div class="form-floating mt-3">
-                            <select class="form-select" formControlName="institution_id">
+                            <select class="form-select" formControlName="institution_id" 
+                                [ngClass]="{'is-invalid': institution_id?.invalid && (institution_id?.dirty || institution_id?.touched), 
+                                            'is-valid': institution_id?.valid && (institution_id?.dirty || institution_id?.touched)}">
                                 <option *ngFor="let option of institutionOptions" [value]="option.institution_id">{{ option.institution_name }}</option>
                             </select>
-                            <label for="floatingInput">สังกัด</label>
-                        </div>
-                        <div *ngIf="institution_id?.invalid && (institution_id?.dirty || institution_id?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="institution_id?.errors?.['required']">กรุณาเลือกต้นสังกัด</div>
+                            <label for="floatingInput">สังกัด :</label>
+                            <div *ngIf="institution_id?.invalid && (institution_id?.dirty || institution_id?.touched)" class="invalid-feedback">
+                                <div *ngIf="institution_id?.errors?.['required']">กรุณาเลือกต้นสังกัด</div>
+                            </div>
                         </div>
                     </div>
+                    
                     <div class="mx-4 mt-5">
                         <h5>ข้อมูลผู้ใช้งาน</h5>
                         <hr>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="username" placeholder="ชื่อผู้ใช้งาน" formControlName="username">
-                            <label for="floatingInput">ชื่อผู้ใช้งาน</label>
-                        </div>
-                        <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="text-danger fade show mt-1">
-                            <div *ngIf="username?.errors?.['required']">กรุณากรอกชื่อผู้ใช้งาน</div>
+                            <input type="text" class="form-control" id="username" 
+                                [ngClass]="{'is-invalid': username?.invalid && (username?.dirty || username?.touched),
+                                            'is-valid': username?.valid && (username?.dirty || username?.touched)}" 
+                                formControlName="username">
+                            <label for="floatingInput">ชื่อผู้ใช้งาน :</label>
+                            <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="invalid-feedback">
+                                <div *ngIf="username?.errors?.['required']">กรุณากรอกชื่อผู้ใช้งาน</div>
+                                <div *ngIf="username?.errors?.['minlength']">ชื่อผู้ใช้ต้องมีอักขระอย่างน้อย 4 ตัว</div>
+                                <div *ngIf="username?.errors?.['pattern']">ชื่อผู้ใช้ต้องประกอบด้วยอักขระที่เป็นตัวเลขและตัวอักษรเท่านั้น</div>
+                            </div>
                         </div>
 
                         <div class="form-floating mt-3">
-                            <input type="password" class="form-control" placeholder="รหัสผ่าน" formControlName="password">
-                            <label for="floatingInput">รหัสผ่าน</label>
+                            <input type="password" class="form-control" 
+                                [ngClass]="{'is-invalid': password?.invalid && (password?.dirty || password?.touched),
+                                            'is-valid': password?.valid && (password?.dirty || password?.touched)}" 
+                                formControlName="password">
+                            <label for="floatingInput">รหัสผ่าน :</label>
+                            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="invalid-feedback">
+                                รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษรและมีอย่างน้อยหนึ่งตัวอักษรและหนึ่งตัวเลข
+                            </div>
                         </div>
-                        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="text-danger fade show mt-1">
-                            กรุณากรอกรหัสผ่าน และต้องมีความยาวอย่างน้อย 6 ตัวอักษร
-                        </div>
+                        
                         <div class="form-floating mt-3">
-                            <input type="password" class="form-control" placeholder="ยืนยันรหัสผ่าน" formControlName="confirmPassword">
-                            <label for="floatingInput">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" 
+                                [ngClass]="{'is-invalid': confirmPassword?.invalid && signUpForm?.hasError('passwordMismatch') && (confirmPassword?.dirty || confirmPassword?.touched),
+                                            'is-valid': confirmPassword?.valid && (confirmPassword?.dirty || confirmPassword?.touched)}" 
+                                formControlName="confirmPassword">
+                            <label for="floatingInput">ยืนยันรหัสผ่าน :</label>
+                            <div *ngIf="signUpForm?.hasError('passwordMismatch') && (confirmPassword?.dirty || confirmPassword?.touched)" class="invalid-feedback">
+                                รหัสผ่านยืนยันไม่ตรงกับรหัสผ่าน
+                            </div>
                         </div>
-                        <div *ngIf="signUpForm?.hasError('passwordMismatch') && (confirmPassword?.dirty || confirmPassword?.touched)" class="text-danger fade show mt-1">
-                            รหัสผ่านยืนยันไม่ตรงกับรหัสผ่าน
-                        </div>
+                        
                     </div>
                     <div class="mx-4 mt-3 mb-3">
-                        <button id="myBtn" class="btn btn-primary custom-button w-100" [disabled]="loading">
+                        <button id="myBtn" class="btn btn-primary custom-button btn-lg w-100" [disabled]="loading">
                             <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
-                            {{ loading ? 'Loading...' : 'สมัครสมาชิก' }}
+                            {{ loading ? 'Loading...' : 'ลงทะเบียน' }}
                         </button>
                     </div>
                   </div>
