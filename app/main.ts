@@ -5,6 +5,8 @@ import * as fs from 'fs';
 import { autoUpdater } from "electron-updater"
 const log = require('electron-log');
 
+autoUpdater.setFeedURL('https://github.com/Nuntawut/smart-desk/releases');
+
 log.transports.file.level = 'info'; // Set the log level
 
 const serverPort = 5432; 
@@ -171,7 +173,7 @@ try {
     setTimeout(createWindow, 400)
 
     // Configure autoUpdater
-    autoUpdater.checkForUpdates()
+    autoUpdater.checkForUpdatesAndNotify()
     
     //Configure Try Icon
     const iconPath = path.join(__dirname, 'images/favicon.png');

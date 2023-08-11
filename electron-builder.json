@@ -3,7 +3,6 @@
   "productName": "Desk Health",
   "copyright": "Copyright © year CPE SUT",
   "asar": true,
-  "compression": "maximum",
   "directories": {
     "output": "release/"
   },
@@ -22,9 +21,7 @@
     {
       "provider": "github",
       "repo": "smart-desk",
-      "owner": "Nuntawut",
-      "private": false,
-      "token": ""
+      "owner": "Nuntawut"
     }
   ],
   "win": {
@@ -47,5 +44,8 @@
     "target": [
       "AppImage"
     ]
+  },
+  "nsis": {
+    "perMachine": true
   }
 }

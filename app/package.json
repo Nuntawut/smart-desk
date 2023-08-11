@@ -6,7 +6,7 @@
     "name": "Eng SUT",
     "email": "nuntawut@sut.ac.th"
   },
-  "version": "1.0.3",
+  "version": "1.0.0",
   "main": "main.js",
   "private": true,
   "dependencies": {
