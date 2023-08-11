@@ -5,12 +5,7 @@ import * as fs from 'fs';
 import { autoUpdater } from "electron-updater"
 const log = require('electron-log');
 
-autoUpdater.setFeedURL('https://github.com/Nuntawut/smart-desk/releases');
-
-log.transports.file.level = 'info'; // Set the log level
-
-const serverPort = 5432; 
-const serverAddress = '203.158.7.77'; 
+log.transports.file.level = 'debug'; // Set the log level
 
 let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
