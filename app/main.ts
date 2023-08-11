@@ -6,6 +6,7 @@ import { autoUpdater } from "electron-updater"
 const log = require('electron-log');
 
 log.transports.file.level = 'debug'; // Set the log level
+autoUpdater.logger = log;
 
 let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
