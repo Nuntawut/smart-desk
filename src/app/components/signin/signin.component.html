@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center mt-5">
       <div class="col-lg-4 col-md-6">
         <div class="text-center mb-4">
           <img src="assets/images/eng-logo.png" width="20%" alt="Logo" class="img-fluid">
         </div>
-        <h2 class="text-center mb-4" style="color: #2d3c44;">Desk Health</h2>
+        <h1 class="h3 mb-3 font-weight-normal mb-4 text-center " style="color: #2d3c44;">Desk Health</h1>
         <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
             <div class="form-floating">
               <input type="text" class="form-control" 
@@ -27,7 +27,7 @@
             </div>
             
             <div class="mb-4 mt-4">
-              <button id="myBtn" class="btn btn-primary custom-button w-100" [disabled]="loading">
+              <button id="myBtn" class="btn btn-lg btn-primary btn-block w-100" [disabled]="loading">
                 <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
                 {{ loading ? 'Loading...' : 'เข้าสู่ระบบ' }}
             </button>

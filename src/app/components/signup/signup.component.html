@@ -1,15 +1,15 @@
-<nav class="navbar navbar-expand-md navbar-light custom-bg fixed-top">
-    <div class="container">
-        <h5 class="text-center custom-font-color"><i class="bi bi-person-add fs-1"></i> ลงทะเบียนผู้ใช้งาน</h5>
-    </div>
-</nav>
 <div class="container-fluid">
-    <div class="row justify-content-center mt-5">
+    <div class="card text-bg-light mx-4 mt-4">
+        <div class="card-body">
+            <h1 class="h4 text-center custom-font-color">ลงทะเบียนผู้ใช้งาน</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6">
             <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                 <div class="d-flex flex-column">
                     <div class="mx-4 mt-4">
-                        <h5>ข้อมูลทั่วไป</h5>
+                        <h1 class="h5">ข้อมูลทั่วไป</h1>
                         <hr>
 
                         <div class="form-floating">
@@ -72,6 +72,7 @@
                             <label for="floatingInput">เบอร์โทรศัพท์ :</label>
                             <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="invalid-feedback">
                                 <div *ngIf="tel?.errors?.['required']">กรุณากรอกเบอร์โทรศัพท์</div>
+                                <div *ngIf="tel?.errors?.['pattern']">กรุณากรอกเบอร์โทรศัพท์เฉพาะตัวเลขเท่านั้น</div>
                             </div>
                         </div>
 
@@ -81,15 +82,15 @@
                                             'is-valid': institution_id?.valid && (institution_id?.dirty || institution_id?.touched)}">
                                 <option *ngFor="let option of institutionOptions" [value]="option.institution_id">{{ option.institution_name }}</option>
                             </select>
-                            <label for="floatingInput">สังกัด :</label>
+                            <label for="floatingInput">สังกัดหน่วยงาน :</label>
                             <div *ngIf="institution_id?.invalid && (institution_id?.dirty || institution_id?.touched)" class="invalid-feedback">
-                                <div *ngIf="institution_id?.errors?.['required']">กรุณาเลือกต้นสังกัด</div>
+                                <div *ngIf="institution_id?.errors?.['required']">กรุณาเลือกหน่วยงาน</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mx-4 mt-5">
-                        <h5>ข้อมูลผู้ใช้งาน</h5>
+                        <h1 class="h5">ข้อมูลผู้ใช้งาน</h1>
                         <hr>
                         <div class="form-floating">
                             <input type="text" class="form-control" id="username" 
@@ -128,7 +129,7 @@
                         
                     </div>
                     <div class="mx-4 mt-3 mb-3">
-                        <button id="myBtn" class="btn btn-primary custom-button btn-lg w-100" [disabled]="loading">
+                        <button id="myBtn" class="btn btn-primary btn-lg w-100" [disabled]="loading">
                             <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
                             {{ loading ? 'Loading...' : 'ลงทะเบียน' }}
                         </button>

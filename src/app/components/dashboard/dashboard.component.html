@@ -7,8 +7,8 @@
     <div class="col-6">
         <div class="card">
             <div class="card-header">เวลาใช้งาน</div>
-            <div class="card-body">
-                <h3>{{userScore.watch_time/60 | number:'1.2-2'}}</h3>
+            <div class="card-body text-primary">
+                <h3 class="card-title">{{userScore.watch_time/60 | number:'1.2-2'}}</h3>
                 นาที
             </div> 
           </div>
@@ -16,8 +16,8 @@
     <div class="col-6">
         <div class="card">
             <div class="card-header">คะแนนทั้งหมด</div>
-            <div class="card-body">
-                <h3>{{userScore.total_score}}</h3>
+            <div class="card-body text-success">
+                <h3 class="card-title">{{userScore.total_score}}</h3>
                 คะแนน
             </div>
         </div>
