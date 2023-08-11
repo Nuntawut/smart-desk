@@ -24,11 +24,10 @@
       "repo": "smart-desk",
       "owner": "Nuntawut",
       "private": false,
-      "token": "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"
+      "token": ""
     }
   ],
   "win": {
-    "publisher": "CPE SUT",
     "icon": "dist/assets/icons",
     "target": [
       "nsis"
