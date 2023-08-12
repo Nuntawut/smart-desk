@@ -1,5 +1,5 @@
 <div class="mb-4 mt-2">
-    <h4>สถิติการเข้าใช้งาน</h4>
+    <h1 class="h4 font-weight-normal">สถิติการเข้าใช้งาน</h1>
     <hr>
 </div>
 
@@ -7,7 +7,7 @@
     <div class="col-6">
         <div class="card">
             <div class="card-header">เวลาใช้งาน</div>
-            <div class="card-body text-primary">
+            <div class="card-body">
                 <h3 class="card-title">{{userScore.watch_time/60 | number:'1.2-2'}}</h3>
                 นาที
             </div> 
@@ -16,7 +16,7 @@
     <div class="col-6">
         <div class="card">
             <div class="card-header">คะแนนทั้งหมด</div>
-            <div class="card-body text-success">
+            <div class="card-body">
                 <h3 class="card-title">{{userScore.total_score}}</h3>
                 คะแนน
             </div>
@@ -24,4 +24,6 @@
     </div>
 </div>
 
+
+<h1 class="h5 font-weight-normal text-center custom-color">การใช้งาน 5 วันย้อนหลัง</h1>
 <canvas id="myChart" width="400" height="250"></canvas>

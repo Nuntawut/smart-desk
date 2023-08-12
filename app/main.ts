@@ -10,6 +10,8 @@ autoUpdater.logger = log;
 
 let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
+let loadingWindow: BrowserWindow | null = null;
+
 let appTray = null
 let isQuitting = false;
 
@@ -19,6 +21,35 @@ const args = process.argv.slice(1),
 function quitFromTray() {
   isQuitting = true;
   mainWindow?.close();
+}
+
+//------------------------loadingWindow-------------------------------
+function createLoadingWindow () {
+
+  const primaryDisplay = screen.getPrimaryDisplay()
+  const { width, height } = primaryDisplay.workAreaSize
+  
+  console.log(width,height)
+  
+  loadingWindow = new BrowserWindow({
+    width: 438,
+    height: 347,
+    minimizable: false,
+    movable: false,
+    frame: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    },
+  });
+
+  loadingWindow.loadFile(path.join(__dirname, 'loading.html'))
+  
+
+  loadingWindow.on('closed', () => {
+    loadingWindow = null;
+  });
+
+  return loadingWindow;
 }
 
 //------------------------PopupWindow-------------------------------
@@ -101,6 +132,11 @@ function createWindow(): BrowserWindow {
     mainWindow.setMenu(null);
 
   }
+
+  if (loadingWindow) {
+    loadingWindow.close();
+  }
+
   // Hide the window instead of closing it
   mainWindow.on('close', (event) => {
      // Check if the window was closed via the system tray menu "Quit" option
@@ -124,53 +160,64 @@ function createWindow(): BrowserWindow {
   return mainWindow;
 }
 
+// Simulate loading and send loading messages
+function simulateLoading() {
+  setTimeout(() => {
+    loadingWindow?.webContents.send('loading-message', 'Checking for updates...');
+  }, 1000);
+
+  setTimeout(() => {
+    loadingWindow?.webContents.send('loading-message', 'Initializing...');
+  }, 2000);
+
+  setTimeout(() => {
+    loadingWindow?.webContents.send('loading-message', 'Downloading update (10%)...');
+  }, 3000);
+  
+  setTimeout(() => {
+    loadingWindow?.webContents.send('loading-message', 'Downloading update (50%)...');
+  }, 4000);
+  
+  setTimeout(() => {
+    loadingWindow?.webContents.send('loading-message', 'Downloading update (90%)...');
+  }, 5000);
+
+  setTimeout(() => {
+    loadingWindow?.webContents.send('loading-message', 'Update downloaded. Quitting and installing...');
+  }, 6000);
+
+  setTimeout(() => {
+    loadingWindow?.close();
+    createWindow();
+  }, 7000);
+}
+
 try {
 
   // Log update events using electron-log
   autoUpdater.on('checking-for-update', () => {
     log.info('Checking for update...');
+    setTimeout(() => {
+      loadingWindow?.webContents.send('loading-message', 'Checking for updates...');
+    }, 1000);
   });
 
   autoUpdater.on('update-available', (info:any) => {
     log.info(`Update available: ${info.version}`);
+    setTimeout(() => {
+      loadingWindow?.webContents.send('loading-message', `Update available: ${info.version}`);
+    }, 1000);
   });
 
   autoUpdater.on('update-not-available', () => {
+
     log.info('No update available');
-  });
+    setTimeout(() => {
+      loadingWindow?.webContents.send('loading-message', 'Initializing...');
+    }, 2000);
 
-  autoUpdater.on('error', (error:any) => {
-    log.error('Error while checking for updates:', error);
-  });
-
-  autoUpdater.on('download-progress', (progressObj:any) => {
-    log.info("\n\nDownload progres");
-    log.info(progressObj);
-  });
-
-  autoUpdater.on('update-downloaded', (info:any) => {
-    log.info('Update downloaded', info);
-    // Prompt the user to install the update
-    dialog.showMessageBox({
-      type: 'info',
-      title: 'รายการอัพเดทพร้อมติดตั้ง',
-      message: 'รายการอัพเดทพร้อมติดตั้ง รีสตาร์ทเพื่อติดตั้ง',
-      buttons: ['รีสตาร์ท', 'ภายหลัง']
-    }).then((result) => {
-      if (result.response === 0) {
-        // User chose to restart and install the update
-        autoUpdater.quitAndInstall();
-      }
-    });
-  });
-
-  app.on('ready', () => {
-  
     setTimeout(createWindow, 400)
 
-    // Configure autoUpdater
-    autoUpdater.checkForUpdatesAndNotify()
-    
     //Configure Try Icon
     const iconPath = path.join(__dirname, 'images/favicon.png');
     appTray = new Tray(iconPath)
@@ -215,7 +262,37 @@ try {
         }
       });
     });
+  });
 
+  autoUpdater.on('error', (error:any) => {
+    log.error('Error while checking for updates:', error);
+  });
+
+  autoUpdater.on('download-progress', (progressObj:any) => {
+    log.info("\n\nDownload progres");
+    log.info(progressObj);
+    setTimeout(() => {
+      loadingWindow?.webContents.send('loading-message', 'Downloading update...');
+    }, 1000);
+  });
+
+  autoUpdater.on('update-downloaded', (info:any) => {
+    log.info('Update downloaded', info);
+    setTimeout(() => {
+      loadingWindow?.webContents.send('loading-message', 'Update downloaded. Quitting and installing...');
+    }, 1000);
+    autoUpdater.quitAndInstall();
+  });
+
+  app.on('ready', () => {
+  
+    setTimeout(createLoadingWindow, 400)
+
+    // Configure autoUpdater
+    autoUpdater.checkForUpdatesAndNotify()
+
+    //simulateLoading();
+    
   });
 
   // Quit when all windows are closed.

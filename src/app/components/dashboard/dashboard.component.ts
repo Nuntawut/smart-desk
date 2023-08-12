@@ -45,6 +45,7 @@ export class DashboardComponent {
               label: 'คะแนน',
               data: scores,
               borderColor: '#880a1f',
+              backgroundColor: '#ffa3b3',
               tension: 0.4,
               pointStyle: 'circle',
               pointRadius: 5,
@@ -52,12 +53,6 @@ export class DashboardComponent {
             }]
           },
           options: {
-            plugins: {
-              title: {
-                display: true,
-                text: 'สถิติการใช้งาน 5 วันย้อนหลัง'
-              }
-            },
             scales: {
               x: {
                 title: {
