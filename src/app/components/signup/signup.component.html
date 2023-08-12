@@ -82,7 +82,7 @@
                                             'is-valid': institution_id?.valid && (institution_id?.dirty || institution_id?.touched)}">
                                 <option *ngFor="let option of institutionOptions" [value]="option.institution_id">{{ option.institution_name }}</option>
                             </select>
-                            <label for="floatingInput">สังกัดหน่วยงาน :</label>
+                            <label for="floatingInput">หน่วยงาน :</label>
                             <div *ngIf="institution_id?.invalid && (institution_id?.dirty || institution_id?.touched)" class="invalid-feedback">
                                 <div *ngIf="institution_id?.errors?.['required']">กรุณาเลือกหน่วยงาน</div>
                             </div>
@@ -131,7 +131,7 @@
                     <div class="mx-4 mt-3 mb-3">
                         <button id="myBtn" class="btn btn-primary btn-lg w-100" [disabled]="loading">
                             <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
-                            {{ loading ? 'Loading...' : 'ลงทะเบียน' }}
+                            {{ loading ? 'กำลังโหลด...' : 'ลงทะเบียน' }}
                         </button>
                     </div>
                   </div>

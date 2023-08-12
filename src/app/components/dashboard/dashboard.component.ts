@@ -44,7 +44,7 @@ export class DashboardComponent {
             datasets: [{
               label: 'คะแนน',
               data: scores,
-              borderColor: 'rgb(239, 83, 80)',
+              borderColor: '#880a1f',
               tension: 0.4,
               pointStyle: 'circle',
               pointRadius: 5,
