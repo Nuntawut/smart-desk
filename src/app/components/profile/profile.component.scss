@@ -1,0 +1,20 @@
+.upload-link {
+    position: relative;
+  }
+  
+.edit-label {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 6px; /* Adjust padding here */
+    border-radius: 4px;
+    font-size: 12px; /* Decrease font size here */
+    display: none;
+  }
+  .upload-link:hover .edit-label {
+    display: block;
+  }
+  

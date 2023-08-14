@@ -14,6 +14,13 @@ export class ProfileComponent {
   userProfile: any = {};
   userScore: any = {};
 
+  userImg = {
+    profileImageBase64: ''
+  };
+
+  selectedImage: File | null = null;
+  hovering = false; // Add this line to declare the hovering property
+
   constructor(
     private authService:AuthService,
     private localStorageService: LocalStorageService,
@@ -41,6 +48,26 @@ export class ProfileComponent {
         .catch(error => {
           console.log('Access denied:', error);
         });
+    }
+  }
+
+  handleImageInput(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedImage = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.userImg.profileImageBase64 = e.target.result;
+        
+          this.authService.updateProfileImage(e.target.result, this.userData.token)
+           .then(response => {
+             console.log('Image updated successfully', response);
+           })
+           .catch(error => {
+             console.log('Access denied:', error);
+           });
+        };
+      reader.readAsDataURL(file);
     }
   }
 }

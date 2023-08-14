@@ -3,7 +3,37 @@
     <hr>
 </div>
 <div class="text-center mb-4">
-    <img src="https://www.w3schools.com/bootstrap5/img_avatar3.png" style="width: 100px;" alt="Logo" class="rounded-circle img-fluid">
+    <label for="imageUpload" class="upload-link">
+        <ng-container *ngIf="hovering">
+            <span class="edit-label">Edit</span>
+        </ng-container>
+        <img
+        *ngIf="userImg.profileImageBase64; else defaultImage"
+        [src]="userImg.profileImageBase64"
+        style="width: 100px; height: 100px; cursor: pointer;"
+        alt="Profile"
+        class="rounded-circle img-fluid"
+        (mouseenter)="hovering = true"
+        (mouseleave)="hovering = false"
+        />
+        <ng-template #defaultImage>
+        <img
+            [src]="userProfile.image"
+            style="width: 100px; height: 100px; cursor: pointer;"
+            alt="Default Profile"
+            class="rounded-circle img-fluid"
+            (mouseenter)="hovering = true"
+            (mouseleave)="hovering = false"
+        />
+        </ng-template>
+    </label>
+    <input
+        type="file"
+        accept="image/*"
+        id="imageUpload"
+        style="display: none;"
+        (change)="handleImageInput($event)"
+    />
 </div>
 <div class="text-center mb-2">
 <h4 class="mb-2">{{ userProfile.username }}</h4>

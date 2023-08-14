@@ -197,9 +197,7 @@ try {
   // Log update events using electron-log
   autoUpdater.on('checking-for-update', () => {
     log.info('Checking for update...');
-    setTimeout(() => {
-      loadingWindow?.webContents.send('loading-message', 'Checking for updates...');
-    }, 1000);
+    loadingWindow?.webContents.send('loading-message', 'Checking for updates...');
   });
 
   autoUpdater.on('update-available', (info:any) => {
@@ -214,9 +212,9 @@ try {
     log.info('No update available');
     setTimeout(() => {
       loadingWindow?.webContents.send('loading-message', 'Initializing...');
-    }, 2000);
+    }, 1000);
 
-    setTimeout(createWindow, 400)
+    setTimeout(createWindow, 1000)
 
     //Configure Try Icon
     const iconPath = path.join(__dirname, 'images/favicon.png');
@@ -246,22 +244,6 @@ try {
         console.log('Popup:', mode);
       }
     });
-
-    //Receive MessageBox from Angular
-    ipcMain.on('showMessageBox', (event, arg) => {
-      dialog.showMessageBox({
-        type: 'info',
-        title: arg.title || 'Message',
-        message: arg.message || 'No message provided',
-        buttons: arg.buttons || ['OK']
-      }).then((result) => {
-        if (result.response === 0 && arg.navigateToNextPage) {
-            mainWindow?.webContents.send('resMessageBox', {
-              message: "OK"
-            })
-        }
-      });
-    });
   });
 
   autoUpdater.on('error', (error:any) => {
@@ -281,7 +263,10 @@ try {
     setTimeout(() => {
       loadingWindow?.webContents.send('loading-message', 'Update downloaded. Quitting and installing...');
     }, 1000);
-    autoUpdater.quitAndInstall();
+    
+    setTimeout(() => {
+      autoUpdater.quitAndInstall();
+    }, 2000);
   });
 
   app.on('ready', () => {
@@ -290,8 +275,6 @@ try {
 
     // Configure autoUpdater
     autoUpdater.checkForUpdatesAndNotify()
-
-    //simulateLoading();
     
   });
 
@@ -310,6 +293,22 @@ try {
 
   app.setLoginItemSettings({
     openAtLogin: true,
+  });
+
+  //Receive MessageBox from Angular
+  ipcMain.on('showMessageBox', (event, arg) => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: arg.title || 'Message',
+      message: arg.message || 'No message provided',
+      buttons: arg.buttons || ['OK']
+    }).then((result) => {
+      if (result.response === 0 && arg.navigateToNextPage) {
+          mainWindow?.webContents.send('resMessageBox', {
+            message: "OK"
+          })
+      }
+    });
   });
 
 } catch (e) {

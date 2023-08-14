@@ -28,6 +28,13 @@ export class AuthService {
     return axios.get('/user/profile', {headers: {Authorization: token}})
   }
 
+  updateProfileImage(imageData: string, token: string) {
+
+    const requestBody = { imageData };
+
+    return axios.put('/user/update-img', requestBody, {headers: {Authorization: token}})
+  }
+
   signup(data:any){
     return axios.post('/user/create', data);
   }
