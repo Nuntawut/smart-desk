@@ -8,6 +8,9 @@ const log = require('electron-log');
 log.transports.file.level = 'debug'; // Set the log level
 autoUpdater.logger = log;
 
+let retryCount = 0;
+const maxRetryCount = 3; // Maximum number of retry attempts
+
 let mainWindow: BrowserWindow | null = null;
 let secondaryWindow: BrowserWindow | null = null;
 let loadingWindow: BrowserWindow | null = null;
@@ -192,6 +195,19 @@ function simulateLoading() {
   }, 7000);
 }
 
+// Function to check for updates with retries
+function checkForUpdatesWithRetry() {
+  if (retryCount < maxRetryCount) {
+    autoUpdater.checkForUpdatesAndNotify()
+    retryCount++;
+  } else {
+    // Max retries reached, restart the app
+    console.log('Max retries reached. Restarting the app...');
+    log.info('Update Max retries reached. Restarting the app...');
+    app.quit();
+  }
+}
+
 try {
 
   // Log update events using electron-log
@@ -248,6 +264,17 @@ try {
 
   autoUpdater.on('error', (error:any) => {
     log.error('Error while checking for updates:', error);
+    // Handle network errors
+    if (error && error.message && error.message.includes('net::ERR_')) {
+      console.log('Network error. Retrying...');
+      log.error('Network error. Retrying...');
+      checkForUpdatesWithRetry();
+    } else {
+      // Other error types, quit the app
+      console.log('Error type not handled. Quitting the app...');
+      log.error('Error type not handled. Quitting the app...');
+      app.quit();
+    }
   });
 
   autoUpdater.on('download-progress', (progressObj:any) => {
@@ -270,12 +297,18 @@ try {
   });
 
   app.on('ready', () => {
-  
-    setTimeout(createLoadingWindow, 400)
 
-    // Configure autoUpdater
-    autoUpdater.checkForUpdatesAndNotify()
-    
+    if (!app.requestSingleInstanceLock()) {
+      // Another instance is already running, so focus it and quit
+      app.quit();
+    } else {
+      setTimeout(createLoadingWindow, 400)
+      
+      // Configure autoUpdater
+      autoUpdater.checkForUpdatesAndNotify()
+      
+    }
+
   });
 
   // Quit when all windows are closed.
