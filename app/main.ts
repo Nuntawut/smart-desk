@@ -312,7 +312,7 @@ try {
       // Configure autoUpdater
       autoUpdater.checkForUpdatesAndNotify()
 
-      simulateLoading()
+      //simulateLoading()
       
     }
 
