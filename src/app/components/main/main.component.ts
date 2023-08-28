@@ -30,24 +30,28 @@ export class MainComponent {
     this.user = this.localStorageService.getItem('user');
 
     this.electronService.ipcRenderer.on('data-from-main', (event, data) => {
-      console.log(data)
-      if(data.status == 'finished'){
-        this.scoreService.insert_score({
-          'user_id': this.user.user_id, 
-          'task_description': data.task_description,
-          'score_value': 10,
-          'watch_time': data.totalDuration,
-        })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.error('Insert score failed.', error);
-        });
-      }
-      
-    });
+      if (data) {
 
+          const totalDurationInt = parseInt(data.totalDuration, 10);
+          
+          const scoreData = {
+              'user_id': this.user.user_id,
+              'task_description': data.task_description,
+              'score_value': 10,
+              'watch_time': totalDurationInt,
+          };
+          this.scoreService.insert_score(scoreData)
+              .then(response => {
+                  console.log(response);
+              })
+              .catch(error => {
+                  console.error('Insert score failed.', error);
+              });
+      } else {
+          console.warn('Received null data from main process.');
+      }
+    });
+  
     // Subscribe to incoming messages from the server
     this.socketService.onMessage().subscribe((data: any) => {
       console.log("Data from Socket Server", data)

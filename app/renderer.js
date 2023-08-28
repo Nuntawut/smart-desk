@@ -3,7 +3,6 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-
 var player;
 window.api.receiveFromMain('data-from-main', (data) => {
   console.log(data.message); // Output: Hello from Main!
@@ -39,17 +38,16 @@ function onPlayerStateChange(event) {
   const totalDuration = player.getDuration();
 
   if (event.data === YT.PlayerState.ENDED && !done) {
+    done = true
+
     console.log('Video has finished!');
+
     const data = {
-      status: 'finished',
+      status: done,
       totalDuration: totalDuration,
     };
-    
-    console.log(data)
 
     window.api.sendToMain('data-from-renderer', data)
-
-    done = true
   }
 
   if (event.data === YT.PlayerState.PLAYING) {

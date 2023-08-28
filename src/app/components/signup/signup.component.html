@@ -67,7 +67,7 @@
                         <div class="form-floating mt-3">
                             <input type="text" class="form-control" 
                                 [ngClass]="{'is-invalid': tel?.invalid && (tel?.dirty || tel?.touched),
-                                            'is-valid': email?.valid && (email?.dirty || email?.touched)}" 
+                                            'is-valid': tel?.valid && (tel?.dirty || tel?.touched)}" 
                                 formControlName="tel">
                             <label for="floatingInput">เบอร์โทรศัพท์ :</label>
                             <div *ngIf="tel?.invalid && (tel?.dirty || tel?.touched)" class="invalid-feedback">

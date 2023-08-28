@@ -81,16 +81,21 @@ function createPopupWindow (task_description:string ,video_id:string) {
   secondaryWindow.setMenu(null);
 
   secondaryWindow.webContents.on('did-finish-load', () => {
-    secondaryWindow?.webContents.send('data-from-main', { message: video_id, width: width, height: height-150});
+    secondaryWindow?.webContents.send('data-from-main', { message: video_id, width: width, height: height-140});
   });
 
   ipcMain.once('data-from-renderer', (event, data) => {
     secondaryWindow?.close()
-    mainWindow?.webContents.send('data-from-main', {
-      task_description: task_description,
-      status: data.status,
-      totalDuration: data.totalDuration,
-    })
+    if (data !== null && data.status==true) {
+      mainWindow?.webContents.send('data-from-main', {
+        task_description: task_description,
+        status: data.status,
+        totalDuration: data.totalDuration,
+      });
+    } else {
+      // Handle the case when data is null or undefined
+      console.log("Data is null or undefined");
+    }
   });
 
   secondaryWindow.on('closed', () => {
@@ -306,6 +311,8 @@ try {
       
       // Configure autoUpdater
       autoUpdater.checkForUpdatesAndNotify()
+
+      simulateLoading()
       
     }
 
