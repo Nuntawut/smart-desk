@@ -32,8 +32,8 @@ export class MainComponent {
     this.electronService.ipcRenderer.on('data-from-main', (event, data) => {
       if (data) {
 
-          const totalDurationInt = parseInt(data.totalDuration, 10);
-          
+          const totalDurationInt = parseInt(data.totalDuration);
+
           const scoreData = {
               'user_id': this.user.user_id,
               'task_description': data.task_description,
