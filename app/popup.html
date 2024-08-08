@@ -4,38 +4,69 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <title>ENGi Take a Break</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+  
+  <!-- Material Design Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-icons/iconfont/material-icons.css">
-  <title>Desk Health</title>
+  
   <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+    }
+    .card {
+      background-color: #800020; /* Change this to your preferred background color */
+      color: #ffffff; /* Change this to your preferred font color */
+    }
+    .card-body {
+      padding: 1.5rem; /* Optional: Adjust padding as needed */
+    }
+    /* Add any additional custom styles here */
+
+    #player {
+      border-radius: 10px; /* Adjust the radius as needed */
+      background-color: #e9ecef; /* Optional: Add background color if needed */
+      padding: 1rem; /* Optional: Add padding if needed */
+    }
   </style>
+  
 </head>
 
 <body>
-<div class="container-fluid">
-  <div class="row justify-content-center mt-2">
-    <div class="col-lg-12">
-      <div class="mb-2" id="player"></div>
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-2">
+      <div class="col-lg-12">
+        <div class="mb-2" id="player"></div>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-lg-12 text-center">
-      <div class="card">
-        <div class="card-body">
-         <div id="timeLeft"></div>
+    <div class="row justify-content-center">
+      <div class="col-lg-12 text-center">
+        <div class="card">
+          <div class="card-body">
+            <div id="timeLeft"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<script src="./renderer.js"></script>
-<script>
-</script>
+
+  <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script src="./renderer.js"></script>
 </body>
 
 </html>

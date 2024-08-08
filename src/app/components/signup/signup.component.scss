@@ -1,0 +1,71 @@
+/* sign-up.component.css */
+body {
+    background-color: #f8f9fa;
+  }
+    // Logo image styles
+    .img-fluid {
+      width: 40%;
+    }
+  .card {
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .custom-font-color {
+    color: #2d3c44;
+  }
+  
+  .form-control.is-invalid, .form-select.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .form-control.is-valid, .form-select.is-valid {
+    border-color: #28a745;
+  }
+  
+  .invalid-feedback {
+    font-size: 0.875em;
+    color: #dc3545;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .btn-lg {
+    font-size: 1.125em;
+    padding: 0.75em 1.5em;
+  }
+  
+  .btn {
+    border-radius: 25px; /* Adjust the value as needed */
+  }
+
+  .register-link {
+    text-decoration: none; /* Remove underline */
+    color: #800020; /* Set the desired color */
+  }
+  
+  .register-link:hover {
+    color: #A67436; /* Optionally, set a different color on hover */
+  }
+
+    #myBtn {
+    border-radius: 25px; /* Adjust the value as needed */
+    background: linear-gradient(90deg, #800020 0%, #c00030 100%); /* Adjust the colors and direction as needed */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+  }
+  
+  #myBtn:disabled {
+    background: linear-gradient(90deg, #9E9E9E 0%, #BDBDBD 100%); /* Gradient for disabled button */
+  }
+  

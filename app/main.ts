@@ -71,6 +71,7 @@ function createPopupWindow (task_description:string ,video_id:string) {
     minimizable: false,
     alwaysOnTop: true,
     movable: false,
+    resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
@@ -198,6 +199,17 @@ function simulateLoading() {
     loadingWindow?.close();
     createWindow();
   }, 7000);
+
+  ipcMain.on('angular-to-main', (event, data) => {
+    console.log(data)
+    const { task_description, video_id, mode } = JSON.parse(data);
+
+    if (secondaryWindow === null && mode=="1") {
+      createPopupWindow(task_description, video_id);
+    }else{
+      console.log('Popup:', mode);
+    }
+  });
 }
 
 // Function to check for updates with retries
@@ -244,7 +256,7 @@ try {
         { label: 'เปิดโปรแกรม', click: () => { mainWindow?.show()}},
         { label: 'ออกจากโปรแกรม', click: () => { quitFromTray();}}
       ]);
-    appTray.setToolTip('Desk Health');
+    appTray.setToolTip('ENGi Take a Break');
     appTray.setContextMenu(contextMenu)
     appTray.on('click', () => {
       if (mainWindow?.isVisible()) {
@@ -256,7 +268,7 @@ try {
 
     //Receive data from Angular
     ipcMain.on('angular-to-main', (event, data) => {
-
+      console.log(data)
       const { task_description, video_id, mode } = JSON.parse(data);
 
       if (secondaryWindow === null && mode=="1") {
@@ -309,11 +321,9 @@ try {
     } else {
       setTimeout(createLoadingWindow, 400)
       
-      // Configure autoUpdater
+      //Configure autoUpdater
       autoUpdater.checkForUpdatesAndNotify()
-
       //simulateLoading()
-      
     }
 
   });

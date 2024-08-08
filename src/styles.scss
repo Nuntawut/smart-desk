@@ -8,29 +8,56 @@ body {
   font-size: 12pt;
  }
  .input-group-text i {
-   color: #880a1f; /* Replace with your desired color */
+   color: #800020; /* Replace with your desired color */
  }
 
  .btn-primary {
-   background-color: #880a1f !important;
-   border-color:  #880a1f !important;
+   background-color: #800020 !important;
+   border-color:  #800020 !important;
  }
 
  .btn-primary:hover,
  .btn-primary:active,
  .btn-primary:visited,
  .btn-primary:focus {
-   background-color: #5a0c18 !important;
-   border-color: #5a0c18 !important;
+   background-color: #800020 !important;
+   border-color: #800020 !important;
  }
 
 .custom-bg {
-  background-color: #5a0c18; /* Replace with your desired color */
+  background: linear-gradient(90deg, #800020 0%, #ad002b 100%); /* Adjust the colors and direction as needed */
 }
 .custom-bg-2 {
-  background-color: #2d3c44;; /* Replace with your desired color */
+  background-color: #800020;; /* Replace with your desired color */
 }
 
 .custom-font-color {
   color: #ffffff; /* Replace with your desired color */
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'Kanit-Light';
+  src: url('assets/fonts/Kanit-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Kanit-Bold';
+  src: url('assets/fonts/Kanit-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Kanit-Thin';
+  src: url('assets/fonts/Kanit-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Kanit-Regular';
+  src: url('assets/fonts/Kanit-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Kanit-Medium';
+  src: url('assets/fonts/Kanit-Medium.ttf');
 }

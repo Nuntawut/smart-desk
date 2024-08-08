@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { LocalStorageService } from '../services/local-storage.service';
-import { SocketService } from '../services/socket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  constructor(private socketService: SocketService, private localStorageService:LocalStorageService){
+  constructor(private localStorageService:LocalStorageService){
   }
 
   isLoggedIn(){
@@ -41,7 +40,6 @@ export class AuthService {
 
   signout(){
     this.localStorageService.clear()
-    this.socketService.disconnect();
     return true
   }
   

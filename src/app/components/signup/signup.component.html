@@ -1,18 +1,15 @@
 <div class="container-fluid">
-    <div class="card text-bg-light mx-4 mt-4">
-        <div class="card-body">
-            <h1 class="h4 text-center custom-font-color">ลงทะเบียนผู้ใช้งาน</h1>
-        </div>
-    </div>
     <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6">
+            <div class="text-center mb-4">
+                <img src="assets/images/engi-well-working.png" alt="Logo" class="img-fluid">
+            </div>
+            <hr>
             <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                 <div class="d-flex flex-column">
                     <div class="mx-4 mt-4">
-                        <h1 class="h5">ข้อมูลทั่วไป</h1>
-                        <hr>
-
-                        <div class="form-floating">
+                        <h1 class="h5" style="font-family: Kanit-Light;">ข้อมูลทั่วไป</h1>
+                        <div class="form-floating" style="font-family: Kanit-Light;">
                             <select class="form-select" 
                                 [ngClass]="{'is-invalid': title_id?.invalid && (title_id?.dirty || title_id?.touched), 
                                             'is-valid': title_id?.valid && (title_id?.dirty || title_id?.touched)}" 
@@ -27,9 +24,9 @@
 
                         <div class="row">
                             <div class="col">
-                                <div class="form-floating mt-3 ">
-                                    <input type="text" class="form-control is-invalid" 
-                                        [ngClass]=" {'is-invalid': fname?.invalid && (fname?.dirty || fname?.touched), 
+                                <div class="form-floating mt-3" style="font-family: Kanit-Light;">
+                                    <input type="text" class="form-control" 
+                                        [ngClass]="{'is-invalid': fname?.invalid && (fname?.dirty || fname?.touched), 
                                                     'is-valid': fname?.valid && (fname?.dirty || fname?.touched)}" 
                                         formControlName="fname">
                                     <label for="floatingInput">ชื่อ :</label>
@@ -39,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-floating mt-3">
+                                <div class="form-floating mt-3" style="font-family: Kanit-Light;">
                                     <input type="text" class="form-control" 
                                         [ngClass]="{'is-invalid': lname?.invalid && (lname?.dirty || lname?.touched),
                                                     'is-valid': lname?.valid && (lname?.dirty || lname?.touched)}" 
@@ -50,9 +47,9 @@
                                     </div>
                                 </div>
                             </div>
-                          </div>
+                        </div>
 
-                        <div class="form-floating mt-3">
+                        <div class="form-floating mt-3" style="font-family: Kanit-Light;">
                             <input type="email" class="form-control" 
                                 [ngClass]="{'is-invalid': email?.invalid && (email?.dirty || email?.touched),  
                                             'is-valid': email?.valid && (email?.dirty || email?.touched)}" 
@@ -64,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="form-floating mt-3">
+                        <div class="form-floating mt-3" style="font-family: Kanit-Light;">
                             <input type="text" class="form-control" 
                                 [ngClass]="{'is-invalid': tel?.invalid && (tel?.dirty || tel?.touched),
                                             'is-valid': tel?.valid && (tel?.dirty || tel?.touched)}" 
@@ -76,7 +73,7 @@
                             </div>
                         </div>
 
-                        <div class="form-floating mt-3">
+                        <div class="form-floating mt-3" style="font-family: Kanit-Light;">
                             <select class="form-select" formControlName="institution_id" 
                                 [ngClass]="{'is-invalid': institution_id?.invalid && (institution_id?.dirty || institution_id?.touched), 
                                             'is-valid': institution_id?.valid && (institution_id?.dirty || institution_id?.touched)}">
@@ -90,9 +87,8 @@
                     </div>
                     
                     <div class="mx-4 mt-5">
-                        <h1 class="h5">ข้อมูลผู้ใช้งาน</h1>
-                        <hr>
-                        <div class="form-floating">
+                        <h1 class="h5" style="font-family: Kanit-Light;">ข้อมูลผู้ใช้งาน</h1>
+                        <div class="form-floating" style="font-family: Kanit-Light;">
                             <input type="text" class="form-control" id="username" 
                                 [ngClass]="{'is-invalid': username?.invalid && (username?.dirty || username?.touched),
                                             'is-valid': username?.valid && (username?.dirty || username?.touched)}" 
@@ -105,7 +101,7 @@
                             </div>
                         </div>
 
-                        <div class="form-floating mt-3">
+                        <div class="form-floating mt-3" style="font-family: Kanit-Light;">
                             <input type="password" class="form-control" 
                                 [ngClass]="{'is-invalid': password?.invalid && (password?.dirty || password?.touched),
                                             'is-valid': password?.valid && (password?.dirty || password?.touched)}" 
@@ -116,7 +112,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-floating mt-3">
+                        <div class="form-floating mt-3" style="font-family: Kanit-Light;">
                             <input type="password" class="form-control" 
                                 [ngClass]="{'is-invalid': confirmPassword?.invalid && signUpForm?.hasError('passwordMismatch') && (confirmPassword?.dirty || confirmPassword?.touched),
                                             'is-valid': confirmPassword?.valid && (confirmPassword?.dirty || confirmPassword?.touched)}" 
@@ -126,17 +122,17 @@
                                 รหัสผ่านยืนยันไม่ตรงกับรหัสผ่าน
                             </div>
                         </div>
-                        
                     </div>
-                    <div class="mx-4 mt-3 mb-3">
+                    
+                    <div class="mx-4 mt-3 mb-3" style="font-family: Kanit-Light;">
                         <button id="myBtn" class="btn btn-primary btn-lg w-100" [disabled]="loading">
-                            <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
+                            <span class="spinner-grow spinner-grow-sm" *ngIf="loading" role="status" aria-hidden="true"></span>
                             {{ loading ? 'กำลังโหลด...' : 'ลงทะเบียน' }}
                         </button>
                     </div>
-                  </div>
+                </div>
             </form>
-            <p class="text-center" style="color: #2d3c44;">หากท่านมีบัญชีแล้ว? <a routerLink="/signin">เข้าสู่ระบบ</a></p>
+            <p class="text-center" style="color: #2d3c44; font-family: Kanit-Light;">หากท่านมีบัญชีแล้ว? <a routerLink="/signin" class="register-link">เข้าสู่ระบบ</a></p>
         </div>
     </div>
 </div>

@@ -1,31 +1,30 @@
 <div class="d-flex flex-column custom-bg text-center sticky-top" style="height: 100vh; width: 4.5rem;">
-    <a routerLink="home" class="d-block mt-4 mb-3 link-dark text-decoration-none" title="Icon-only">
-      <img src="assets/images/logo_white.png" width="40" alt="Logo">
-    </a>
-    
-    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-      <li class="nav-item">
-        <a routerLink="home" routerLinkActive="active" class="nav-link py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-            <i class="bi bi-house-fill fs-1"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="dashboard" routerLinkActive="active" class="nav-link py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-            <i class="bi bi-bar-chart-fill fs-1"></i>
-        </a>
-      </li>
-    </ul>
+  <a routerLink="home" class="d-block mt-4 mb-3 link-dark text-decoration-none" title="Icon-only">
+    <img src="assets/images/logo_white.png" width="40" alt="Logo">
+  </a>
   
-    <div class="dropdown border-top"> <!-- Moved the dropdown to the bottom with "mt-auto" class -->
-      <a href="#" class="d-flex custom-font-color align-items-center justify-content-center p-3 text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi-person-circle h2"></i>
+  <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+    <li class="nav-item">
+      <a routerLink="home" routerLinkActive="active" class="nav-link py-3 border-bottom" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+        <i class="bi bi-house-fill fs-1"></i>
       </a>
-      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-        <li><a routerLink="setting" routerLinkActive="active" class="dropdown-item">เกี่ยวกับเรา</a></li>
-        <li><a routerLink="profile" routerLinkActive="active" class="dropdown-item">ข้อมูลผู้ใช้งาน</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" (click)="signout()">ออกจากระบบ</a></li>
-      </ul>
-    </div>
+    </li>
+    <li class="nav-item">
+      <a routerLink="dashboard" routerLinkActive="active" class="nav-link py-3 border-bottom" aria-current="page" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+        <i class="bi bi-bar-chart-fill fs-1"></i>
+      </a>
+    </li>
+  </ul>
+
+  <div class="dropdown border-top mt-auto">
+    <a href="#" class="d-flex custom-font-color align-items-center justify-content-center p-3 text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-person-circle h2"></i>
+    </a>
+    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+      <li><a routerLink="setting" routerLinkActive="active" class="dropdown-item">เกี่ยวกับเรา</a></li>
+      <li><a routerLink="profile" routerLinkActive="active" class="dropdown-item">ข้อมูลผู้ใช้งาน</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" (click)="signout()">ออกจากระบบ</a></li>
+    </ul>
   </div>
-  
+</div>

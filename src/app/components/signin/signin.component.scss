@@ -1,0 +1,77 @@
+// Container styles
+.container-fluid {
+    padding: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+  
+  // Centered row styles
+  .row {
+    &.justify-content-center {
+      height: 100%;
+      margin-top: 3rem;
+    }
+  }
+  
+  // Column styles
+  .col-lg-4,
+  .col-md-6 {
+    .text-center {
+      margin-bottom: 4rem;
+    }
+  }
+  
+  // Logo image styles
+  .img-fluid {
+    width: 60%;
+  }
+  
+  // Form styles
+  form {
+    .form-floating {
+      font-family: 'Kanit-Light';
+    }
+  
+    .form-floating.mt-4 {
+      margin-top: 4rem;
+    }
+  
+    .btn-block {
+      width: 100%;
+      font-family: 'Kanit-Light';
+    }
+  }
+  
+  // Footer styles
+  .text-center {
+    color: #2d3c44;
+    font-family: 'Kanit-Light';
+  }
+
+  .btn {
+    border-radius: 25px; /* Adjust the value as needed */
+  }
+
+  .register-link {
+    text-decoration: none; /* Remove underline */
+    color: #800020; /* Set the desired color */
+  }
+  
+  .register-link:hover {
+    color: #A67436; /* Optionally, set a different color on hover */
+  }
+
+  #myBtn {
+    border-radius: 25px; /* Adjust the value as needed */
+    background: linear-gradient(90deg, #800020 0%, #c00030 100%); /* Adjust the colors and direction as needed */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+  }
+  
+  #myBtn:disabled {
+    background: linear-gradient(90deg, #9E9E9E 0%, #BDBDBD 100%); /* Gradient for disabled button */
+  }
+  

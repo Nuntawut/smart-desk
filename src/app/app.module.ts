@@ -4,13 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://203.158.7.77:3000/api';
-//axios.defaults.baseURL = 'http://localhost:3000/api';
-const config: SocketIoConfig = { url: 'http://203.158.7.77:80', options: {} };
-//const config: SocketIoConfig = { url: 'http://localhost:5173', options: {} };
+axios.defaults.baseURL = '';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -41,7 +37,6 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
     SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

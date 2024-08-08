@@ -1,40 +1,36 @@
-<div class="container-fluid p-5" style="background-image: url('assets/images/background-1.png'); background-size: cover; background-repeat: no-repeat; height: 100vh;">
-    <div class="row justify-content-center h-100 mt-3">
-      <div class="col-lg-4 col-md-6">
-        <div class="text-center mb-4">
-          <img src="assets/images/eng-logo.png" width="20%" alt="Logo" class="img-fluid">
-        </div>
-        <h1 class="h3 mb-3 font-weight-normal mb-4 text-center " style="color: #2d3c44;">Desk Health</h1>
-        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-            <div class="form-floating">
-              <input type="text" class="form-control" 
-                  [ngClass]="{'is-invalid': username?.invalid && (username?.dirty || username?.touched)}" 
-                      id="username" formControlName="username">
-              <label for="floatingInput">ชื่อผู้ใช้งาน :</label>
-              <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="invalid-feedback">
-                <div *ngIf="username?.errors?.['required']">กรุณากรอกชื่อผู้ใช้งาน</div>
-              </div>
-            </div>
-            
-            <div class="form-floating mt-4">
-              <input type="password" class="form-control" id="password" 
-                  [ngClass]="{'is-invalid': password?.invalid && (password?.dirty || password?.touched)}" 
-                  formControlName="password">
-              <label for="floatingPassword">รหัสผ่าน :</label>
-              <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="invalid-feedback">
-                <div *ngIf="password?.errors?.['required']">กรุณากรอกรหัสผ่าน</div>
-              </div>
-            </div>
-            
-            <div class="mb-4 mt-4">
-              <button id="myBtn" class="btn btn-lg btn-primary btn-block w-100" [disabled]="loading">
-                <span class="spinner-grow spinner-grow-sm" *ngIf="loading"  role="status" aria-hidden="true"></span>
-                {{ loading ? 'กำลังโหลด...' : 'เข้าสู่ระบบ' }}
-            </button>
-            </div>
-        </form>
-        <p class="text-center" style="color: #2d3c44;">หากท่านยังไม่มีบัญชี? <a routerLink="/signup" >ลงทะเบียน</a></p>
+<div class="container-fluid" style="background-image: url('assets/images/background-1.png');">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6">
+      <div class="text-center mb-4">
+        <img src="assets/images/engi-well-working.png" alt="Logo" class="img-fluid">
       </div>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-floating">
+          <input type="text" class="form-control" 
+                 [ngClass]="{'is-invalid': username?.invalid && (username?.dirty || username?.touched)}" 
+                 id="username" formControlName="username" placeholder="ชื่อผู้ใช้งาน">
+          <label for="username">ชื่อผู้ใช้งาน :</label>
+          <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" class="invalid-feedback">
+            <div *ngIf="username?.errors?.['required']">กรุณากรอกชื่อผู้ใช้งาน</div>
+          </div>
+        </div>
+        <div class="form-floating mt-4">
+          <input type="password" class="form-control" 
+                 [ngClass]="{'is-invalid': password?.invalid && (password?.dirty || password?.touched)}" 
+                 id="password" formControlName="password" placeholder="รหัสผ่าน">
+          <label for="password">รหัสผ่าน :</label>
+          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="invalid-feedback">
+            <div *ngIf="password?.errors?.['required']">กรุณากรอกรหัสผ่าน</div>
+          </div>
+        </div>
+        <div class="mb-4 mt-4">
+          <button id="myBtn" class="btn btn-lg btn-primary btn-block" [disabled]="loading">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="loading" role="status" aria-hidden="true"></span>
+            {{ loading ? 'กำลังโหลด...' : 'เข้าสู่ระบบ' }}
+          </button>
+        </div>
+      </form>
+      <p class="text-center">หากท่านยังไม่มีบัญชี? <a routerLink="/signup" class="register-link">ลงทะเบียน</a></p>
     </div>
+  </div>
 </div>
-
