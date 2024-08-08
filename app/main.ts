@@ -30,7 +30,7 @@ function quitFromTray() {
 function createLoadingWindow () {
 
   const primaryDisplay = screen.getPrimaryDisplay()
-  const { width, height } = primaryDisplay.workAreaSize
+  const { width, height } = primaryDisplay.size
   
   console.log(width,height)
   
@@ -59,7 +59,7 @@ function createLoadingWindow () {
 function createPopupWindow (task_description:string ,video_id:string) {
 
   const primaryDisplay = screen.getPrimaryDisplay()
-  const { width, height } = primaryDisplay.workAreaSize
+  const { width, height } = primaryDisplay.size
   
   console.log(width,height)
   
@@ -82,7 +82,7 @@ function createPopupWindow (task_description:string ,video_id:string) {
   secondaryWindow.setMenu(null);
 
   secondaryWindow.webContents.on('did-finish-load', () => {
-    secondaryWindow?.webContents.send('data-from-main', { message: video_id, width: width, height: height-140});
+    secondaryWindow?.webContents.send('data-from-main', { message: video_id, width: width, height: height-100});
   });
 
   ipcMain.once('data-from-renderer', (event, data) => {
@@ -322,8 +322,8 @@ try {
       setTimeout(createLoadingWindow, 400)
       
       //Configure autoUpdater
-      autoUpdater.checkForUpdatesAndNotify()
-      //simulateLoading()
+      //autoUpdater.checkForUpdatesAndNotify()
+      simulateLoading()
     }
 
   });

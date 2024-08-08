@@ -6,10 +6,12 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 window.api.receiveFromMain('data-from-main', (data) => {
   console.log(data.message); // Output: Hello from Main!
-  
+
+  const playerHeight = window.innerHeight - document.querySelector('.card').offsetHeight - 50; // Adjust for margin
+
   player = new YT.Player('player', {
     width: '100%',
-    height: data.height,
+    height: playerHeight,
     videoId: data.message,
     playerVars: {
       'playsinline': 1,
